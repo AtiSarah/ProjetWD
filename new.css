@@ -44,13 +44,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  z-index: 1000; /* Ensure the nav bar stays on top */
+  z-index: 1000;
 }
 
 .logo {
   font-family: "Montserrat", sans-serif;
-  font-weight: 700; /* Utilisation du poids gras pour mettre en évidence */
-  font-size: 23px; /* Taille du texte du logo */
+  font-weight: 700;
+  font-size: 23px;
   color: white;
   text-decoration: none;
 }
@@ -71,7 +71,7 @@ nav {
 .navbar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 16px; /* Augmentation de la taille de l'écriture */
+  font-size: 16px;
   transition: color 0.3s;
 }
 
@@ -89,19 +89,19 @@ nav {
 }
 
 .text-box h1 {
-  font-size: 48px; /* Augmentation de la taille de l'écriture */
+  font-size: 48px;
   margin-bottom: 20px;
 }
 
 .text-box p {
-  font-size: 18px; /* Augmentation de la taille de l'écriture */
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
 .text-box a {
   color: #fff;
   text-decoration: none;
-  font-size: 20px; /* Augmentation de la taille de l'écriture */
+  font-size: 20px;
   background: #f44336;
   padding: 10px 20px;
   border-radius: 5px;
