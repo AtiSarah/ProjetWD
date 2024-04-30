@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="user.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Interface</title>
+</head>
+
+<body>
+    <header>
+        <div >
+            <a href="#" class="logo" > VROOMCAR</a>
+        </div>
+        <div class="logout">
+            <a href="#">Logout</a>
+        </div>
+    </header>
+    <div id="mission-container">
+        <div class="mission">
+            <div class="mission-details">
+                <strong>Mission:</strong> Parcel Delivery
+            </div>
+            <div class="mission-details">
+                <strong>Mission Details:</strong>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Mission Type</th>
+                            <th>Departure City</th>
+                            <th>Arrival City</th>
+                            <th>Departure Date</th>
+                            <th>Duration (Deadline)</th>
+                            <th>Cost</th>
+                            <th>Vehicle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button onclick="acceptMission()">Accept</button>
+            <button onclick="declineMission()">Decline</button>
+            <div class="mission-details">
+                <strong>Personal Information:</strong><br>
+                Employee Code: <span id="code-employee">12345</span><br>
+                Name: <span id="nom">Doe</span><br>
+                First Name: <span id="prenom">John</span><br>
+                License Type: <span id="type-permis">B</span>
+            </div>
+        </div>
+    </div>
+    <div id="frais-imprevus">
+        <form action="" name="imprevus">
+            <legend><strong>Incidentals</strong></legend>
+            <input type="text" placeholder="enter incidentals..."><br>
+            <input type="number" placeholder="enter amount..."><br>
+            <input type="submit" value="send">&nbsp;
+            <input type="reset" value="Cancel">
+        </form>
+    </div>
+    <script>
+        function acceptMission() {
+            alert("Mission accepted!");
+        }
+
+        function declineMission() {
+            alert("Mission declined!");
+        }
+    </script>
+</body>
+</html>

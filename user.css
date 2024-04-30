@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.logout {
+    text-align: right;
+}
+
+.logout a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 50px;
+    text-align: left;
+}
+
+h1 {
+    color: #333;
+}
+
+.categories {
+    margin-top: 30px;
+    border: 2px solid #007bff; /* Ajout d'une bordure de couleur bleue */
+    border-radius: 5px; /* Ajout d'un arrondi aux coins de la bordure */
+    padding: 15px; /* Ajout de remplissage pour l'intÃ©rieur de la bordure */
+}
+
+.categories h2 {
+    margin-bottom: 10px;
+}
+
+.categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories ul li {
+    margin-bottom: 10px;
+}
+
+.categories ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.categories ul li a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
