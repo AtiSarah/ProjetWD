@@ -5,27 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission Manager</title>
     <link rel="stylesheet" href="mission.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
 </head>
 <body>
     <header>
-        <div >
-            <a href="#" class="logo" > VROOMCAR</a>
+        <div class="logo-container">
+            <a href="mission.html" class="logo">vroom</a>
+            <i class="fas fa-car logo-icon" ></i>
         </div>
-        <div class="logout">
-            <a href="#">Logout</a>
-        </div>
+        <nav class="logout">
+           <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt">logout</i> </a>
+        </nav>
     </header>
     <div class="container">
-        <h1>Mission Manager Dashboard</h1>
+      
         <div class="categories">
-            <h2>Action Categories</h2>
             <ul>
-                <li><a href="#">Add Mission</a></li>
-                <li><a href="#">Add Vehicle</a></li>
-                <li><a href="#">Add Driver</a></li>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="#" >Dashboard</a></li>
+                <li><a href="#" onclick="toggleForm('mission-form')">Add Mission</a></li>
+                <li><a href="#" >Add Vehicle</a></li>
+                <li><a href="#" >Add Driver</a></li>
+                
             </ul>
         </div>
     </div>
+
+    <div id="mission-form" style="display: none;">
+        <h2>Add Mission Form :</h2>
+        <form>
+            <label for="mission-type">Type of Mission:</label>
+            <select id="mission-type" name="mission-type">
+                <option value="delivery">Delivery</option>
+                <option value="pickup">Pickup</option>
+                <option value="transport">Transport</option>
+            </select><br>
+            <label for="departure-city">Departure City:</label>
+            <input type="text" id="departure-city" name="departure-city"><br>
+            <label for="destination-city">Destination City:</label>
+            <input type="text" id="destination-city" name="destination-city"><br>
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration"><br>
+            <label for="departure-date" >Departure Date:</label>
+            <input type="date" id="departure-date" name="departure-date"><br>
+            <label for="estimated-cost">Estimated Cost:</label>
+            <input type="text" id="estimated-cost" name="estimated-cost"><br>
+            <label for="vehicle">Select Vehicle:</label>
+            <select id="vehicle" name="vehicle">
+                <option value="car">Car</option>
+                <option value="van">Van</option>
+                <option value="truck">Truck</option>
+            </select><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+        
+        
+      
+  
+    <script>
+        function toggleForm(formId) {
+            var form = document.getElementById(formId);
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,90 +1,83 @@
+/* Styles de base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth; /*smooth scroll*/
+  scroll-behavior: smooth;
   overflow-y: scroll;
 }
+
 #section1 {
-  height: 100vh; /* 100vh = 100% of viewport height (une page)*/
-  background: red;
+  height: 100vh;
+  background: rgb(255, 255, 255);
 }
 #section2 {
   height: 100vh;
-  background: black;
-}
-#section3 {
-  background: yellow;
-  height: 100vh;
+  background: rgb(255, 255, 255);
 }
 
+#section3 {
+  background: rgb(255, 255, 255);
+  height: 100vh;
+}
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
-
 .header {
-  min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("./img/sect0.jpg");
+  background-color: fff;
+  min-height: 70vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./img/car.jpeg");
   background-position: center;
   background-size: cover;
-  position: relative;
+  position:relative;
 }
-
 nav {
-  position: fixed; /*fixed nav bar*/
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: black;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
   z-index: 1000;
 }
-
 .logo {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 23px;
-  color: white;
+  color: rgb(10, 10, 10);
   text-decoration: none;
 }
-
 .navbar ul {
   list-style: none;
 }
-
 .navbar ul li {
   display: inline-block;
   margin-right: 20px;
 }
-
 .navbar ul li:last-child {
   margin-right: 0;
 }
-
 .navbar ul li a {
-  color: white;
+  color: rgb(1, 1, 1);
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s;
 }
-
 .navbar ul li a.active,
 .navbar ul li a:hover {
-  color: #f44336;
+  color: #17305f;
 }
-
 .text-box {
   color: #fff;
   position: absolute;
-  top: 40%;
-  left: 30%;
+  top: 42%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -92,30 +85,202 @@ nav {
   font-size: 48px;
   margin-bottom: 20px;
 }
-
 .text-box p {
   font-size: 18px;
   margin-bottom: 20px;
 }
-
 .text-box a {
-  color: #fff;
+  color: #070707;
   text-decoration: none;
   font-size: 20px;
-  background: #f44336;
+  background: #ffffff;
   padding: 10px 20px;
   border-radius: 5px;
   transition: background 0.3s;
 }
-
 .text-box a:hover {
   background: #fff;
-  color: #f44336;
+  color: #17305f;
 }
 .h1car {
-  color: #f44336;
+  color: #17305f;
 }
 .btn {
   padding-top: 40px;
   position: absolute;
+
+}
+
+.btn2 {
+  padding-top: 40px;
+ 
+  position: absolute;
+  left: calc(34% + 1px); /* Adjust as needed */
+}
+
+/* Styles for Contact Us */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* Afficher les éléments en ligne */
+  height: 100vh;
+}
+
+.contact .info {
+  max-width: 500px;
+  width: 50%; /* Ajuster la largeur de l'info à 50% */
+  color: black;
+  margin-bottom: 20px; /* Reduce the margin to create more compact layout */
+  margin-right: 20px; /* Ajustez la marge à droite de l'écriture */
+}
+
+.contact .info h1 {
+  font-size: 36px; /* Adjust the font size for the title */
+  margin-bottom: 10px; /* Reduce the margin for the title */
+}
+
+.contact .info p {
+  font-size: 18px; /* Adjust the font size for paragraphs */
+  margin-bottom: 10px; /* Reduce the margin for paragraphs */
+}
+
+.contact .info a {
+  color: #17305f; /* Change link color */
+  font-weight: bold; /* Make links bold */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Add transition effect */
+}
+
+.contact .info a:hover {
+  color: #070707; /* Change link color on hover */
+}
+
+.contact form {
+  max-width: 500px;
+  width: 50%; /* Ajuster la largeur du formulaire à 50% */
+  margin-right: 100px;  /* Ajustez la marge à gauche du formulaire */
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  flex: 1;
+  font-weight: bold;
+  color: black;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  flex: 2;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+textarea {
+  height: 100px;
+}
+
+button[type="submit"] {
+  background-color: #17305f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #fff;
+  color: #17305f;
+}
+
+/* Move the contact form to the appropriate section */
+#section2 .contact {
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+
+/* Styles for Login Page */
+.login {
+  background: rgb(255, 255, 255);
+  color: black;
+  padding: 250px 20px;
+  text-align: center;
+}
+
+.login form {
+  max-width: 500px;
+  width: 100%;
+  color: black;
+  margin: 0 auto;
+  
+}
+
+.login h1 {
+  margin-bottom: 30px;
+  color: black;
+}
+
+.login .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.login label {
+  flex: 1;
+  font-weight: bold;
+  color: black;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+  flex: 2;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.login button[type="submit"] {
+  background-color: #17305f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.login button[type="submit"]:hover {
+  background-color: #fff;
+  color: #17305f;
+}
+footer {
+  background-color: #f2f2f2;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
 }
