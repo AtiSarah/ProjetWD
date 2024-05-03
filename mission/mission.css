@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;   
+    font-size: 20px;
+  }
+  
+
+
+    .sidebar {
+        height: 100%;
+        width: 350px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #17305f;
+        padding-top: 50px;
+    }
+    
+    .sidebar h2 {
+        color: #fff;
+        text-align: center;
+        margin-bottom: 80px;
+    }
+    
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+      
+    }
+    
+    .sidebar ul li a:hover {
+        color: #e62020;
+    }
+    
+    .main-content {
+        margin-left: 200px;
+        padding: 20px;
+    }
+
+    #mission-form {
+        margin: 50px auto;
+        padding: 30px;
+        width: 500px;
+    }
+    
+    #mission-form h2 {
+        margin-bottom: 20px;
+        color: #17305f;
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    #mission-form label {
+        display: block;
+        margin-bottom: 10px;
+        color: #17305f;
+        font-weight: bold;
+    }
+    
+    #mission-form input[type="text"],
+    #mission-form input[type="date"],
+    #mission-form select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    
+    #mission-form input[type="submit"] {
+        background-color: #17305f;
+        color: #fff;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    
+    #mission-form input[type="submit"]:hover {
+        background-color: #e62020;
+    
+    }
+    
