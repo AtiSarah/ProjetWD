@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire de Véhicule</title>
+    <link rel="stylesheet" type="text/css" href="vehicule.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>ADMIN</h2>
+        <details>
+            <summary>DASHBOARD</summary>
+            <li><a href="driver.html">DRIVER</a></li>
+            <li><a href="vehicule.html">VEHICULE</a></li>
+        </details>
+        <details>
+            <summary>DRIVER</summary>
+            <li><a href="addDriver.html">ADD DRIVER</a></li>
+            <li><a href="#">EDIT DRIVER</a></li>
+            <li><a href="#">DELETE DRIVER</a></li>
+        </details>
+        <details>
+            <summary>VEHICULE</summary>
+            <li><a href="addVehicle.html">ADD VEHICULE</a></li>
+            <li><a href="#">EDIT VEHICULE</a></li>
+            <li><a href="#">DELETE VEHICULE</a></li>
+        </details>
+        </ul>
+    </div>
+    
+
+<div id="vehicule-form">
+    <h2>Add Vehicule</h2>
+    <form action="#" method="POST">
+        <div>
+            <label for="immatriculation">Immatriculation :</label>
+            <input type="text" id="immatriculation" name="immatriculation" required>
+        </div>
+        <div>
+            <label for="disponibilite">Availability :</label>
+            <select id="disponibilite" name="disponibilite">
+                <option value="oui">yes</option>
+                <option value="non">No</option>
+            </select>
+        </div>
+        <div>
+            <label for="assurance">Insurance :</label>
+            <input type="text" id="assurance" name="assurance">
+        </div>
+        <div>
+            <label for="etat">State :</label>
+            <input type="text" id="etat" name="etat">
+        </div>
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+
+</body>
+</html>
