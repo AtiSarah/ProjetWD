@@ -81,7 +81,7 @@
     
     #frais-imprevus input[type="text"],
     #frais-imprevus input[type="number"] {
-        width: calc(100% - 40px); /* Largeur des champs de saisie */
+        width: calc(100% - 1px); /* Largeur des champs de saisie */
         padding: 10px;
         margin-bottom: 15px;
     }
