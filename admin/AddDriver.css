@@ -50,36 +50,42 @@ body {
     padding: 20px;
 }
 
-.AddDriver {
-    margin: 50px auto;
-    padding: 30px;
-    width: 500px;
+/* Apply the same style as the universal selector to the form */
+#vehicule-form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.AddDriver h2 {
-    margin-bottom: 20px;
-    color: #000000;
-    text-align: center;
-    font-size: 24px;
+#vehicule-form h2 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: inherit;
+    text-align: inherit;
+    font-size: inherit;
 }
 
-.AddDriver label {
+#vehicule-form label {
     display: block;
-    margin-bottom: 10px;
-    color: #010101;
-    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: inherit;
+    font-weight: inherit;
 }
 
-.AddDriver input[type="text"],
-.AddDriver input[type="date"],
-.AddDriver select {
+#vehicule-form input[type="text"],
+#vehicule-form input[type="date"],
+#vehicule-form select {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
-.AddDriver input[type="submit"] {
+#vehicule-form button[type="submit"] {
     background-color: #000000;
     color: #fff;
     padding: 12px 25px;
@@ -91,7 +97,7 @@ body {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.AddDriver input[type="submit"]:hover {
+#vehicule-form button[type="submit"]:hover {
     background-color: #333333;
     transform: scale(1.05);
 }
