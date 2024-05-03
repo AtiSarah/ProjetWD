@@ -49,3 +49,48 @@ body {
     margin-left: 200px;
     padding: 20px;
 }
+
+#vehicule-form {
+    margin-left: 380px; /* Adjust margin to align with the sidebar */
+    padding: 20px;
+}
+
+#vehicule-form h2 {
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 24px;
+    text-align: center;
+}
+
+#vehicule-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#vehicule-form input[type="text"],
+#vehicule-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Add a border for input fields */
+    border-radius: 5px; /* Round the corners of input fields */
+}
+
+#vehicule-form button[type="submit"] {
+    background-color: #000;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#vehicule-form button[type="submit"]:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
