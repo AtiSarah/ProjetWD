@@ -18,7 +18,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #17305f;
+        background-color: #083aac;
         padding-top: 50px;
     }
     
@@ -45,7 +45,7 @@
     }
     
     .sidebar ul li a:hover {
-        color: #e62020;
+        color: #27a6ab;
     }
     
     .main-content {
