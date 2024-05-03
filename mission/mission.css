@@ -18,7 +18,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #17305f;
+        background-color: #f5775d;
         padding-top: 50px;
     }
     
@@ -61,7 +61,7 @@
     
     #mission-form h2 {
         margin-bottom: 20px;
-        color: #17305f;
+        color: #000000;
         text-align: center;
         font-size: 24px;
     }
@@ -69,7 +69,7 @@
     #mission-form label {
         display: block;
         margin-bottom: 10px;
-        color: #17305f;
+        color: #010101;
         font-weight: bold;
     }
     
@@ -83,7 +83,7 @@
     }
     
     #mission-form input[type="submit"] {
-        background-color: #17305f;
+        background-color: #000000;
         color: #fff;
         padding: 12px 25px;
         border: none;
@@ -94,8 +94,5 @@
         transition: background-color 0.3s, transform 0.3s;
     }
     
-    #mission-form input[type="submit"]:hover {
-        background-color: #e62020;
-    
-    }
+
     
