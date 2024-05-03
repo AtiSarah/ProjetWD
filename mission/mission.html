@@ -14,41 +14,48 @@
 <div class="sidebar">
 <h2>MENU </h2>
 <ul>
-    <li><a href="testmission.html">DASHBOARD</a></li>
-    <li><a href="mission.html">ADD MISSION</a></li>
+    <li><a href="mission.html">DASHBOARD</a></li>
+    <li><a href="addmission.html">ADD MISSION</a></li>
 </ul>
 </div>
-<!-- mission-form -->
-<div id="mission-form">
-    <h2>ADD MISSION:</h2>
-    <form>
-        <label for="mission-type">Type of Mission:</label>
-        <select id="mission-type" name="mission-type">
-            <option value="delivery">Delivery</option>
-            <option value="pickup">Pickup</option>
-            <option value="transport">Transport</option>
-        </select><br>
-        <label for="departure-city">Departure City:</label>
-        <input type="text" id="departure-city" name="departure-city"><br>
-        <label for="destination-city">Destination City:</label>
-        <input type="text" id="destination-city" name="destination-city"><br>
-        <label for="duration">Duration:</label>
-        <input type="text" id="duration" name="duration"><br>
-        <label for="departure-date" >Departure Date:</label>
-        <input type="date" id="departure-date" name="departure-date"><br>
-        <label for="estimated-cost">Estimated Cost:</label>
-        <input type="text" id="estimated-cost" name="estimated-cost"><br>
-        <label for="vehicle">Select Vehicle Type:</label>
-        <select id="vehicle" name="vehicle">
-            <option value="car">Car</option>
-            <option value="van">Van</option>
-            <option value="truck">Truck</option>
+<!-- DASHBOARD -->
+<div id="DASHBOARD">
+    <table border="1"> 
+        <thead>
+            <tr>
+                <th>Mission Type</th>
+                <th>Departure City</th>
+                <th>Arrival City</th>
+                <th>Departure Date</th>
+                <th>Duration (Deadline)</th>
+                <th>Cost</th>
+                <th>Driver</th>
+                <th>Vehicle</th>
+                <th>State</th>
 
-
-        </select><br>
-        <input type="submit" value="Submit">
-    </form>
+            </tr>
+        </thead>  
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><!-- Mission Type content --></td> 
+                <td><!-- Departure City content --></td>
+                <td><!-- Arrival City content --></td>
+                <td><!-- Departure Date content --></td>
+                <td><!-- Duration content --></td>
+                <td><!-- Cost content --></td>
+                <td><!-- Vehicle content --></td>
+            </tr>
+            <!-- More mission entries can be added here -->
+        </tbody>
+    </table>
+   
 </div>
+
+
+
+
 
 
 
