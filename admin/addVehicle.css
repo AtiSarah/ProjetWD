@@ -8,79 +8,87 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;   
     font-size: 20px;
+    background-color: #ffffff;
 }
 
 .sidebar {
     height: 100%;
-    width: 350px;
+    width: 280px;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #3a39394d;
+    background-color: #21385f;
     padding-top: 50px;
+    color: #fff;
 }
 
 .sidebar h2 {
-    color: #fff;
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    padding-bottom: 10px;
+   
 }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar ul li {
+.sidebar summary {
+    cursor: pointer;
     padding: 10px;
-    text-align: center;
+    list-style-type: none; /* Remove bullet point */
 }
 
-.sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
+.sidebar details {
+    margin-bottom: 15px;
 }
 
-.sidebar ul li a:hover {
-    color: #e62020;
+.sidebar details summary {
+    font-size: 21px;
+    padding: 10px;
 }
 
-.main-content {
-    margin-left: 200px;
+/* Add this CSS to your existing stylesheet */
+.sidebar details li {
     padding: 20px;
+ 
 }
 
+.sidebar details li a {
+    color: #f8f9fa !important; /* Change text color */
+    text-decoration: none !important; /* Remove text decoration */
+    font-size: 18px;
+}
 #vehicule-form {
-    margin-left: 380px; /* Adjust margin to align with the sidebar */
-    padding: 20px;
+    margin: 50px auto;
+    padding: 30px;
+    width: 500px;
 }
 
 #vehicule-form h2 {
     margin-bottom: 20px;
-    color: #000;
-    font-size: 24px;
+    color: #000000;
     text-align: center;
+    font-size: 24px;
 }
 
 #vehicule-form label {
     display: block;
     margin-bottom: 10px;
+    color: #191a1a;
     font-weight: bold;
 }
 
 #vehicule-form input[type="text"],
 #vehicule-form select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px;
     font-size: 16px;
-    border: 1px solid #ccc; /* Add a border for input fields */
-    border-radius: 5px; /* Round the corners of input fields */
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-#vehicule-form button[type="submit"] {
-    background-color: #000;
-    color: #fff;
+#vehicule-form input[type="submit"] {
+    background-color: #000000;
+    color: #ffffff;
     padding: 12px 25px;
     border: none;
     border-radius: 5px;
@@ -90,7 +98,15 @@ body {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-#vehicule-form button[type="submit"]:hover {
-    background-color: #333;
-    transform: scale(1.05);
+#vehicule-form button[type="submit"] {
+    background-color: #000000; /* Couleur de fond */
+    color: #ffffff; /* Couleur du texte */
+    padding: 12px 25px; /* Rembourrage */
+    border: none; /* Supprimer la bordure */
+    border-radius: 5px; /* Ajouter un rayon de bordure */
+    cursor: pointer; /* Curseur au survol */
+    font-size: 12px; /* Taille de la police */
+    font-weight: bold; /* Gras */
+
 }
+
