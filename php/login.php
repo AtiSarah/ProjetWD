@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Requête SQL pour vérifier l'email et le mot de passe dans la table utilisateur
-    $sql = "SELECT id, email, pass, profile FROM user WHERE email = ? LIMIT 1";
-    $stmt = $conn->prepare($sql);
+    $sql = "SELECT id, email, pass, profile FROM user WHERE email = ?";
+    $stmt = $link->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
