@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     <?php
     // Include the database connection file
-    include("dbp.php");
+    include("../dbp.php");
 
     // Query to select all records from the mission table
     $sql = "SELECT * FROM mission";
