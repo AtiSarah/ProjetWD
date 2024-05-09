@@ -1,3 +1,42 @@
+<?php
+session_start();
+include "dbp.php"; // Inclure le fichier de connexion à la base de données
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email2'];
+    $password = $_POST['password'];
+
+    // Requête SQL pour vérifier l'email et le mot de passe dans la table utilisateur
+    $sql = "SELECT id, email, pass, profile FROM user WHERE email = ? LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['pass'])) {
+            // Authentification réussie, démarrer la session
+            $_SESSION['user_id'] = $row['id'];
+            if ($row['profile'] == 0) {
+                // Redirection vers l'interface manager
+                header("Location: manager/interface_mission.php");
+            } else {
+                // Redirection vers l'interface driver
+                header("Location: driver/interface_driver.php");
+            }
+            exit();
+        } else {
+            // Mot de passe incorrect
+            echo "Mot de passe incorrect.";
+        }
+    } else {
+        // Aucun utilisateur trouvé avec cet email
+        echo "Aucun utilisateur trouvé avec cet email.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>

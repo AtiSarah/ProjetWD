@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Redirect based on the profile
             if ($profile == 0) {
-                header("Location: manager.php");
+                header("Location: ../manager/manager.php");
                 exit();
             } elseif ($profile == 1) {
-                header("Location: driver.php");
+                header("Location: ../driver/driver.php");
                 exit();
             }
         } 
