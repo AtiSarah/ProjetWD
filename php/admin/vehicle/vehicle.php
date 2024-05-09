@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Add Vehicle</h2>
-    <form action="addvehicle.php" method="post">
+    <form action="vehicle.php" method="post">
         <label for="immatriculation">Immatriculation:</label><br>
         <input type="text" id="immatriculation" name="immatriculation" required><br><br>
         
