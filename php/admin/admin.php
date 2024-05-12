@@ -27,9 +27,9 @@
         </details>
         <details>
             <summary>EDIT</summary>
-            <li><a href="#">USERS</a></li>
-            <li><a href="#">MANAGERS</a></li>
-            <li><a href="#">DRIVERS</a></li>   
+            <li><a href="user/updateuser.php">USERS</a></li>
+            <li><a href="manager/updatemanager.php">MANAGERS</a></li>
+            <li><a href="driver/updatedriver.php">DRIVERS</a></li>   
             <li><a href="vehicle/updatevehicle.php">VEHICLES</a></li>
          
         </details>
