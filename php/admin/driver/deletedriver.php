@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             echo "Cannot delete driver. Related mission records exist.";
         } else {
             // No related records found, proceed with driver deletion
-            $deleteDriverSql = $link->prepare("DELETE FROM driver WHERE id_driver = ?");
+            $deleteDriverSql = $link->prepare("DELETE FROM driver WHERE id = ?");
             $deleteDriverSql->bind_param("i", $id);
             $deleteDriverSql->execute();
             $deleteDriverSql->close();
@@ -82,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             echo "<td>" . $row["lastname"] . "</td>";
             echo "<td>" . $row["datenaiss"] . "</td>";
             echo "<td>" . $row["phone"] . "</td>";
-            echo "<td><form method='post' action='deletedriver.php?id=" . $row["id_driver"] . "' onsubmit='return confirm(\"Are you sure you want to delete this driver?\")'>
-                    <input type='hidden' name='id' value='" . $row["id_driver"] . "'>
+            echo "<td><form method='post' action='deletedriver.php?id=" . $row["id"] . "' onsubmit='return confirm(\"Are you sure you want to delete this driver?\")'>
+                    <input type='hidden' name='id' value='" . $row["id"] . "'>
                     <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
                     <input type='submit' name='delete' value='Delete'>
                 </form></td>";
