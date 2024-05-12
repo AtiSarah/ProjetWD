@@ -76,6 +76,22 @@
 
     mysqli_close($link);
     ?>
+
+    <form id="confirmForm" method="post" action="">
+        <input type="hidden" id="id_driver" name="id_driver">
+        <input type="hidden" id="confirmAction" name="confirmAction">
+    </form>
+
+    <script>
+        function confirmUpdate(id_driver) {
+            if (confirm("Are you sure you want to update this driver?")) {
+                document.getElementById("id_driver").value = id_driver;
+                document.getElementById("confirmAction").value = "update";
+                document.getElementById("confirmForm").submit();
+            }
+        }
+    </script>
+
     <a href="../admin.php"><button>done</button></a>
 </body>
 </html>

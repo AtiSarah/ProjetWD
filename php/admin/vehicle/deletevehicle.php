@@ -27,7 +27,7 @@ include("../dbp.php");
 // Query to select all records from the vehicle table
 $sql = "SELECT * FROM vehicle";
 $result = $link->query($sql);
-
+echo "<h2>Delete vehicle</h2>";
 // Check if there are any records returned
 if ($result && $result->num_rows > 0) {
     // Table header

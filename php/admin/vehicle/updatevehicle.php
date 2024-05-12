@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Vehicles</title>
+    <script>
+        function confirmUpdate() {
+            return confirm('Are you sure you want to update this vehicle?');
+        }
+    </script>
 </head>
 <body>
     <h2>Update Vehicles</h2>
@@ -25,10 +30,20 @@
         // Update the vehicle details in the database
         $updateSql = $link->prepare("UPDATE vehicle SET immatriculation=?, type=?, license_type=?, brand=?, state=? WHERE id_vehicle=?");
         $updateSql->bind_param("issssi", $immatriculation, $type, $license_type, $brand, $state, $id_vehicle);
-        $updateSql->execute();
-        $updateSql->close();
-
-        echo "Vehicle updated successfully.";
+        
+        // Check if confirmation is submitted
+        if (isset($_POST['confirmUpdate'])) {
+            $updateSql->execute();
+            $updateSql->close();
+            echo "Vehicle updated successfully.";
+        } else {
+            // Display confirmation message
+            echo "<script>
+                    function confirmUpdate() {
+                        return confirm('Are you sure you want to update this vehicle?');
+                    }
+                </script>";
+        }
     }
 
     // Fetch all vehicles from the database
@@ -56,14 +71,15 @@
             echo "<td>" . $row['brand'] . "</td>";
             echo "<td>" . $row['state'] . "</td>";
             echo "<td>
-                    <form method='post' action=''>
+                    <form method='post' action='' id='updateForm'>
                         <input type='hidden' name='id_vehicle' value='" . $row['id_vehicle'] . "'>
                         <input type='number' name='immatriculation' value='" . $row['immatriculation'] . "'>
                         <input type='text' name='type' value='" . $row['type'] . "'>
                         <input type='text' name='license_type' value='" . $row['license_type'] . "'>
                         <input type='text' name='brand' value='" . $row['brand'] . "'>
                         <input type='text' name='state' value='" . $row['state'] . "'>
-                        <input type='submit' name='update' value='Update'>
+                        <input type='submit' name='update' value='Update' onclick='return confirmUpdate();'>
+                        <input type='hidden' name='confirmUpdate' value='true'>
                     </form>
                 </td>";
             echo "</tr>";

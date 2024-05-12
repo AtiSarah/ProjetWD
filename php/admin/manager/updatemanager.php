@@ -19,14 +19,28 @@
         $lastname = $_POST['lastname'];
         $datenaiss = $_POST['datenaiss'];
         $phone = $_POST['phone'];
-        
-        // Update the manager details in the database
-        $updateSql = $link->prepare("UPDATE manager SET firstname=?, lastname=?, datenaiss=?, phone=? WHERE id_manager=?");
-        $updateSql->bind_param("ssssi", $firstname, $lastname, $datenaiss, $phone, $id_manager);
-        $updateSql->execute();
-        $updateSql->close();
 
-        echo "Manager updated successfully.";
+        // Check if the confirmation has been submitted
+        if (isset($_POST['confirmAction']) && $_POST['confirmAction'] === 'update') {
+            // Update the manager details in the database
+            $updateSql = $link->prepare("UPDATE manager SET firstname=?, lastname=?, datenaiss=?, phone=? WHERE id_manager=?");
+            $updateSql->bind_param("ssssi", $firstname, $lastname, $datenaiss, $phone, $id_manager);
+            $updateSql->execute();
+            $updateSql->close();
+
+            echo "Manager updated successfully.";
+        } else {
+            // Display confirmation message
+            echo "<script>
+                    function confirmUpdate(id_manager) {
+                        if (confirm('Are you sure you want to update this manager?')) {
+                            document.getElementById('id_manager').value = id_manager;
+                            document.getElementById('confirmAction').value = 'update';
+                            document.getElementById('confirmForm').submit();
+                        }
+                    }
+                </script>";
+        }
     }
 
     // Fetch all managers from the database
@@ -58,7 +72,7 @@
                         <input type='text' name='lastname' value='" . $row['lastname'] . "'>
                         <input type='date' name='datenaiss' value='" . $row['datenaiss'] . "'>
                         <input type='text' name='phone' value='" . $row['phone'] . "'>
-                        <input type='submit' name='update' value='Update'>
+                        <button type='submit' name='update' onclick='confirmUpdate(" . $row['id_manager'] . ")'>Update</button>
                     </form>
                 </td>";
             echo "</tr>";
@@ -71,6 +85,12 @@
 
     mysqli_close($link);
     ?>
+
+    <form id="confirmForm" method="post" action="">
+        <input type="hidden" id="id_manager" name="id_manager">
+        <input type="hidden" id="confirmAction" name="confirmAction">
+    </form>
+
     <a href="../admin.php"><button>done</button></a>
 </body>
 </html>

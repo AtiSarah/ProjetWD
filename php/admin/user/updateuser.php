@@ -18,13 +18,27 @@
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password before storing
         
-        // Update the user details in the database
-        $updateSql = $link->prepare("UPDATE user SET email=?, pass=? WHERE id=?");
-        $updateSql->bind_param("ssi", $email, $password, $id);
-        $updateSql->execute();
-        $updateSql->close();
+        // Check if the confirmation has been submitted
+        if (isset($_POST['confirmAction']) && $_POST['confirmAction'] === 'update') {
+            // Update the user details in the database
+            $updateSql = $link->prepare("UPDATE user SET email=?, pass=? WHERE id=?");
+            $updateSql->bind_param("ssi", $email, $password, $id);
+            $updateSql->execute();
+            $updateSql->close();
 
-        echo "User updated successfully.";
+            echo "User updated successfully.";
+        } else {
+            // Display confirmation message
+            echo "<script>
+                    function confirmUpdate(id) {
+                        if (confirm('Are you sure you want to update this user?')) {
+                            document.getElementById('id').value = id;
+                            document.getElementById('confirmAction').value = 'update';
+                            document.getElementById('confirmForm').submit();
+                        }
+                    }
+                </script>";
+        }
     }
 
     // Fetch all users from the database
@@ -36,7 +50,6 @@
         echo "<tr>
                 <th>ID</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Action</th>
             </tr>";
 
@@ -44,13 +57,12 @@
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";
-            echo "<td>*****</td>"; // Display password as asterisks for security reasons
             echo "<td>
                     <form method='post' action=''>
                         <input type='hidden' name='id' value='" . $row['id'] . "'>
                         <input type='email' name='email' value='" . $row['email'] . "'>
                         <input type='password' name='password' placeholder='Enter new password'>
-                        <input type='submit' name='update' value='Update'>
+                        <button type='submit' name='update' onclick='confirmUpdate(" . $row['id'] . ")'>Update</button>
                     </form>
                 </td>";
             echo "</tr>";
@@ -60,6 +72,14 @@
     } else {
         echo "No users found.";
     }
-    echo '<a href="../admin.php"><button>done</button></a>';
-?>
-   
+    mysqli_close($link);
+    ?>
+
+    <form id="confirmForm" method="post" action="">
+        <input type="hidden" id="id" name="id">
+        <input type="hidden" id="confirmAction" name="confirmAction">
+    </form>
+
+    <a href="../admin.php"><button>done</button></a>
+</body>
+</html>
