@@ -7,8 +7,7 @@
 </head>
 <body>
     <h2>Update Missions</h2>
-    <a href="mission.php"><button>Back to Missions</button></a>
-    <br><br>
+    <br>
 
     <?php
     session_start();
