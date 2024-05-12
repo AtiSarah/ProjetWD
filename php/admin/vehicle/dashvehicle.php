@@ -7,6 +7,7 @@ $result = $link->query($sql);
 
 // Vérifiez s'il y a des données disponibles
 if ($result->num_rows > 0) {
+    echo "<h1>Vehicle</h1>";
     // Démarrez la sortie du tableau HTML
     echo "<table border='1'>
     <tr>

@@ -11,6 +11,7 @@ $result = mysqli_query($link, $sql);
 // Check if there are any records returned
 if ($result && mysqli_num_rows($result) > 0) {
     // Display table header
+    echo "<h1>Manager</h1>";
     echo "<table border='1'>
     <tr>
     <th>ID</th>

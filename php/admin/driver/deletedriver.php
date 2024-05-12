@@ -64,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     // Check if there are any records returned
     if ($result && $result->num_rows > 0) {
         // Display table header
+        
         echo "<table border='1'>
         <tr>
         <th>ID Driver</th>
