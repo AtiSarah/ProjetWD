@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql->close();
 
             // Rediriger vers une page de confirmation ou autre
-            header("Location: vehicle.php");
+            header("Location: ../admin.php");
             exit();
         } else {
             echo "Tous les champs doivent être remplis.";
@@ -72,6 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <input type="submit" name="submit" value="Add Vehicle">
     </form>
-    <a href="../admin.php"><button>done</button></a>
+    <a href="../admin.php"><button>Cancel</button></a>
 </body>
 </html>
