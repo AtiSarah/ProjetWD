@@ -17,7 +17,7 @@
     <li><a href="dashmission.php">MISSION</a></li>
     <li><a href="mission.php">ADD MISSION</a></li>
     <li><a href="deletemission.php">DELETE MISSION</a></li>
-    <li><a href="Editmission.php">EDIT MISSION</a></li>
+    <li><a href="updatemission.php">EDIT MISSION</a></li>
 </ul>
 </div>
 
