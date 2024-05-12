@@ -2,7 +2,7 @@
 include("../dbp.php");
 
 // Sélectionnez toutes les données des véhicules depuis la base de données
-$sql = "SELECT id_vehicle, immatriculation, type, license_type, state FROM vehicle";
+$sql = "SELECT id_vehicle, immatriculation, type, license_type, brand, state FROM vehicle";
 $result = $link->query($sql);
 
 // Vérifiez s'il y a des données disponibles
@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
     <th>Immatriculation</th>
     <th>Type</th>
     <th>Type de licence</th>
+    <th>Marque</th>
     <th>État</th>
     </tr>";
 
@@ -24,6 +25,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["immatriculation"] . "</td>";
         echo "<td>" . $row["type"] . "</td>";
         echo "<td>" . $row["license_type"] . "</td>";
+        echo "<td>" . $row["brand"] . "</td>";
         echo "<td>" . $row["state"] . "</td>";
         echo "</tr>";
     }

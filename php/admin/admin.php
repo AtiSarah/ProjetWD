@@ -30,7 +30,7 @@
             <li><a href="#">USERS</a></li>
             <li><a href="#">MANAGERS</a></li>
             <li><a href="#">DRIVERS</a></li>   
-            <li><a href="#">VEHICLES</a></li>
+            <li><a href="vehicle/updatevehicle.php">VEHICLES</a></li>
          
         </details>
         <details>
