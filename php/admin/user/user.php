@@ -34,6 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ../driver/driver.php");
                 exit();
             }
+            elseif ($profile == 3){
+                header("Location: ../admin.php");
+                exit();
+            }
         } 
     }
 }

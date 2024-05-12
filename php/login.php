@@ -17,13 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['pass'])) {
             // Authentification réussie, démarrer la session
-            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_id'] = $row['id_driver'];
             if ($row['profile'] == 0) {
                 // Redirection vers l'interface manager
                 header("Location: manager/interface_mission.php");
-            } else {
+            } else if ($row['profile'] == 1){
                 // Redirection vers l'interface driver
-                header("Location: driver/interface_driver.php");
+                $id = $row['id'];
+                header("Location: driver/driver.php?id=$id");
+            }
+            else{
+              header("Location: admin/admin.php");
             }
             exit();
         } else {
@@ -131,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="login" id="section3">
   
   <h1>LOGIN</h1>
-  <form action="#" method="POST">
+  <form action="#" method="Post">
     <div class="form-group">
       <label for="email2">Email:</label>
       <input type="email" id="email2" name="email2" required placeholder="Enter your email">

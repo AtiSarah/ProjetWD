@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("../dbp.php"); 
+$id = $_GET['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +15,10 @@
     <div class="sidebar">
         <h2>MENU</h2>
         <ul>
-            <li><a href="driver.php">DASHBOARD</a></li>
-            <li><a href="incidentals.php">INCIDENTALS</a></li>
-            <li><a href="account.php">ACCOUNT</a></li>
+            <li><a href="driver.php?id=<?php echo $id;?>">DASHBOARD</a></li>
+            <li><a href="incidentals.php?id=<?php echo $id;?>">INCIDENTALS</a></li>
+            
+            <li><a href="account.php?id=<?php echo $id;?>">ACCOUNT</a></li>
         </ul>
     </div>
     <div id="DASHBOARD">
