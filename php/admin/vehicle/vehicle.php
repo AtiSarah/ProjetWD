@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql->close();
 
             // Rediriger vers une page de confirmation ou autre
-            header("Location: addvehicle.php");
+            header("Location: vehicle.php");
             exit();
         } else {
             echo "Tous les champs doivent être remplis.";

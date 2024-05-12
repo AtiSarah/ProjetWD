@@ -20,8 +20,8 @@
         <details>
             <summary>ADD</summary>
             <li><a href="./user/user.php">USERS</a></li>
-            <li><a href="./manager/manager.php">MANAGERS</a></li>
-            <li><a href="./driver/driver.php">DRIVERS</a></li>
+            <!-- <li><a href="./manager/manager.php">MANAGERS</a></li>
+            <li><a href="./driver/driver.php">DRIVERS</a></li> -->
             <li><a href="./vehicle/vehicle.php">VEHICLES</a></li>
          
         </details>
