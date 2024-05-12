@@ -57,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Add Mission</h2>
-    <a href="dashdriver.php" target="_blank"><button>Show Driver List</button></a>
-    <a href="dashvehicle.php" target="_blank"><button>Show Vehicle List</button></a>
+    <a href="dashdriver.php" ><button>Show Driver List</button></a>
+    <a href="dashvehicle.php"><button>Show Vehicle List</button></a>
     <form action="mission.php" method="post">
         <label for="driver_id">Driver ID:</label><br>
         <input type="text" id="driver_id" name="driver_id" required><br><br>
