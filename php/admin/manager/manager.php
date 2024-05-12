@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $sql->close();
 
                 // Redirect to appropriate page after insertion
-                header("Location: manager.php"); // Adjust the location if needed
+                header("Location: ../admin.php"); // Adjust the location if needed
                 exit();
             } else {
                 // Handle error if user ID is not available in session
