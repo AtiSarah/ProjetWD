@@ -27,7 +27,7 @@
                     $sql->close();
 
                     // Redirect to appropriate page after insertion
-                    header("Location: driver.php"); // Adjust the location if needed
+                    header("Location: ../admin.php"); // Adjust the location if needed
                     exit();
                 } else {
                     // Handle error if user ID is not available in session
@@ -73,6 +73,6 @@
         <input type="submit" name="submit" value="CREATE">
     </form>
     </div>
-    <a href="../admin.php"><button>done</button></a>
+    
 </body>
 </html>
