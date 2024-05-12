@@ -105,5 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" name="submit" value="CREATE">
     </form>
     </div>
+    <a href="../admin.php"><button>done</button></a>
 </body>
 </html>

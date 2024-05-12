@@ -5,28 +5,39 @@ include("../dbp.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
 
-    // Check if there are related records in the mission table
-    $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
-    $checkMissionSql->bind_param("i", $id);
-    $checkMissionSql->execute();
-    $checkMissionResult = $checkMissionSql->get_result();
+    // Check if the user confirms the deletion
+    if (isset($_POST['confirm_delete'])) {
+        // Check if there are related records in the mission table
+        $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
+        $checkMissionSql->bind_param("i", $id);
+        $checkMissionSql->execute();
+        $checkMissionResult = $checkMissionSql->get_result();
 
-    if ($checkMissionResult->num_rows > 0) {
-        // Display error message or handle related records deletion
-        echo "Cannot delete driver. Related mission records exist.";
+        if ($checkMissionResult->num_rows > 0) {
+            // Display error message or handle related records deletion
+            echo "Cannot delete driver. Related mission records exist.";
+        } else {
+            // No related records found, proceed with driver deletion
+            $deleteDriverSql = $link->prepare("DELETE FROM driver WHERE id_driver = ?");
+            $deleteDriverSql->bind_param("i", $id);
+            $deleteDriverSql->execute();
+            $deleteDriverSql->close();
+            
+            // Delete the associated user
+            $deleteUserSql = $link->prepare("DELETE FROM user WHERE id = ?");
+            $deleteUserSql->bind_param("i", $id);
+            $deleteUserSql->execute();
+            $deleteUserSql->close();
+
+            echo "Driver and associated user deleted successfully.";
+        }
+
+        // Close prepared statements and database connection
+        $checkMissionSql->close();
+        mysqli_close($link);
     } else {
-        // No related records found, proceed with driver deletion
-        $deleteSql = $link->prepare("DELETE FROM driver WHERE id_driver = ?");
-        $deleteSql->bind_param("i", $id);
-        $deleteSql->execute();
-        $deleteSql->close();
-
-        echo "Driver deleted successfully.";
+        echo "Deletion cancelled.";
     }
-
-    // Close prepared statements and database connection
-    $checkMissionSql->close();
-    mysqli_close($link);
 }
 ?>
 
@@ -39,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 </head>
 <body>
     <h2>Delete Driver</h2>
-    <a href="driver.php"><button>Add Driver</button></a>
+   
     <br><br>
 
     <?php
@@ -60,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
         <th>Last Name</th>
         <th>Date of Birth</th>
         <th>Phone</th>
-        <th>License Type</th>
         <th>Action</th>
         </tr>";
 
@@ -72,9 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             echo "<td>" . $row["lastname"] . "</td>";
             echo "<td>" . $row["datenaiss"] . "</td>";
             echo "<td>" . $row["phone"] . "</td>";
-            echo "<td>" . $row["license_type"] . "</td>";
-            echo "<td><form method='post' action='deletedriver.php'>
+            echo "<td><form method='post' action='deletedriver.php?id=" . $row["id_driver"] . "' onsubmit='return confirm(\"Are you sure you want to delete this driver?\")'>
                     <input type='hidden' name='id' value='" . $row["id_driver"] . "'>
+                    <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
                     <input type='submit' name='delete' value='Delete'>
                 </form></td>";
             echo "</tr>";
@@ -87,6 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     // Close the database connection
     mysqli_close($link);
+    echo' <a href="../admin.php"><button>done</button></a>';
+
     ?>
 </body>
 </html>

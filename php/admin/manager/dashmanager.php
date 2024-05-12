@@ -41,4 +41,5 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 // Close the database connection
 mysqli_close($link);
+echo '<a href="../admin.php"><button>done</button></a>';
 ?>

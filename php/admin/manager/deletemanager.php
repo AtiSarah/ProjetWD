@@ -5,28 +5,40 @@ include("../dbp.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
 
-    // Check if there are related records in the mission table
-    $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
-    $checkMissionSql->bind_param("i", $id);
-    $checkMissionSql->execute();
-    $checkMissionResult = $checkMissionSql->get_result();
+    // Check if the user confirms the deletion
+    if (isset($_POST['confirm_delete'])) {
+        // Check if there are related records in the mission table
+        $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
+        $checkMissionSql->bind_param("i", $id);
+        $checkMissionSql->execute();
+        $checkMissionResult = $checkMissionSql->get_result();
 
-    if ($checkMissionResult->num_rows > 0) {
-        // Display error message or handle related records deletion
-        echo "Cannot delete manager. Related mission records exist.";
+        if ($checkMissionResult->num_rows > 0) {
+            // Display error message or handle related records deletion
+            echo "Cannot delete manager. Related mission records exist.";
+        } else {
+            // No related records found, proceed with manager deletion
+            $deleteManagerSql = $link->prepare("DELETE FROM manager WHERE id = ?");
+            $deleteManagerSql->bind_param("i", $id);
+            $deleteManagerSql->execute();
+            $deleteManagerSql->close();
+            
+            // Delete the associated user
+            $deleteUserSql = $link->prepare("DELETE FROM user WHERE id =?");
+            
+            $deleteUserSql->bind_param("i", $id);
+            $deleteUserSql->execute();
+            $deleteUserSql->close();
+
+            echo "Manager and associated user deleted successfully.";
+        }
+
+        // Close prepared statements and database connection
+        $checkMissionSql->close();
+        mysqli_close($link);
     } else {
-        // No related records found, proceed with manager deletion
-        $deleteSql = $link->prepare("DELETE FROM manager WHERE id_manager = ?");
-        $deleteSql->bind_param("i", $id);
-        $deleteSql->execute();
-        $deleteSql->close();
-
-        echo "Manager deleted successfully.";
+        echo "Deletion cancelled.";
     }
-
-    // Close prepared statements and database connection
-    $checkMissionSql->close();
-    mysqli_close($link);
 }
 ?>
 
@@ -39,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 </head>
 <body>
     <h2>Delete Manager</h2>
-    <a href="manager.php"><button>Add Manager</button></a>
+   
     <br><br>
 
     <?php
@@ -71,8 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             echo "<td>" . $row["lastname"] . "</td>";
             echo "<td>" . $row["datenaiss"] . "</td>";
             echo "<td>" . $row["phone"] . "</td>";
-            echo "<td><form method='post' action='deletemanager.php'>
-                    <input type='hidden' name='id' value='" . $row["id_manager"] . "'>
+            echo "<td><form method='post' action='deletemanager.php?id=" . $row["id"] . "' onsubmit='return confirm(\"Are you sure you want to delete this manager?\")'>
+                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                    <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
                     <input type='submit' name='delete' value='Delete'>
                 </form></td>";
             echo "</tr>";
@@ -85,6 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     // Close the database connection
     mysqli_close($link);
+    echo' <a href="../admin.php"><button>done</button></a>';
+
     ?>
 </body>
 </html>

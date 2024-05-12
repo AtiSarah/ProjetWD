@@ -33,4 +33,5 @@ if ($result->num_rows > 0) {
     echo "0 results"; // Si aucune donnée n'est disponible
 }
 $link->close();
+echo '<a href="../admin.php"><button>done</button></a>';
 ?>

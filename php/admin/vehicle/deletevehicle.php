@@ -66,4 +66,5 @@ if ($result && $result->num_rows > 0) {
 mysqli_close($link);
 
 echo '<a href="../admin.php"><button>done</button></a>';
+
 ?>

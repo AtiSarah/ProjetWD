@@ -5,19 +5,24 @@ include("../dbp.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
 
-    // Check if there are related records in other tables
-    // Example: Check if the user is associated with any missions or other data before deletion
+    // Check if the user confirms the deletion
+    if (isset($_POST['confirm_delete'])) {
+        try {
+            $deleteSql = $link->prepare("DELETE FROM user WHERE id = ?");
+            $deleteSql->bind_param("i", $id);
+            $deleteSql->execute();
+            $deleteSql->close();
 
-    // Proceed with user deletion
-    $deleteSql = $link->prepare("DELETE FROM user WHERE id = ?");
-    $deleteSql->bind_param("i", $id);
-    $deleteSql->execute();
-    $deleteSql->close();
+            echo "User deleted successfully.";
 
-    echo "User deleted successfully.";
-
-    // Close database connection
-    mysqli_close($link);
+            mysqli_close($link);
+        } catch (mysqli_sql_exception $e) {
+            // Simplified error message for foreign key constraint failure
+            echo "Cannot delete user. The user is associated with other data.";
+        }
+    } else {
+        echo "Deletion cancelled.";
+    }
 }
 ?>
 
@@ -30,20 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 </head>
 <body>
     <h2>Delete User</h2>
-    <a href="user.php"><button>Add User</button></a>
+   
     <br><br>
 
     <?php
-    // Include the database connection file
     include("../dbp.php");
 
-    // Query to select all records from the user table
     $sql = "SELECT * FROM user";
     $result = $link->query($sql);
 
-    // Check if there are any records returned
     if ($result && $result->num_rows > 0) {
-        // Display table header
         echo "<table border='1'>
         <tr>
         <th>ID</th>
@@ -52,26 +53,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
         <th>Action</th>
         </tr>";
 
-        // Output data of each row
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
             echo "<td>" . $row["email"] . "</td>";
             echo "<td>" . $row["profile"] . "</td>";
-            echo "<td><form method='post' action='deleteuser.php'>
+            echo "<td><form method='post' action='deleteuser.php' onsubmit='return confirm(\"Are you sure you want to delete this user?\")'>
                     <input type='hidden' name='id' value='" . $row["id"] . "'>
+                    <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
                     <input type='submit' name='delete' value='Delete'>
                 </form></td>";
             echo "</tr>";
         }
-        // Close the table
+
         echo "</table>";
     } else {
         echo "No records found";
     }
 
-    // Close the database connection
     mysqli_close($link);
+    
+    echo '<a href="../admin.php"><button>done</button></a>';
     ?>
 </body>
 </html>
