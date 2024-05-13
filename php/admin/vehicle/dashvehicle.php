@@ -4,19 +4,18 @@ include("../dbp.php");
 // Sélectionnez toutes les données des véhicules depuis la base de données
 $sql = "SELECT id_vehicle, immatriculation, type, license_type, brand, state FROM vehicle";
 $result = $link->query($sql);
-
 // Vérifiez s'il y a des données disponibles
 if ($result->num_rows > 0) {
     echo "<h1>Vehicle</h1>";
     // Démarrez la sortie du tableau HTML
     echo "<table border='1'>
     <tr>
-    <th>ID</th>
+    <th>ID Vehicle</th>
     <th>Immatriculation</th>
     <th>Type</th>
-    <th>Type de licence</th>
-    <th>Marque</th>
-    <th>État</th>
+    <th>License Type</th>
+    <th>Brand</th>
+    <th>State</th>
     </tr>";
 
     // Sortie des données de chaque ligne
