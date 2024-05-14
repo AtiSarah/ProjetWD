@@ -79,5 +79,6 @@
 
     mysqli_close($link);
     ?>
+    <a href="manager.php"><button>done</button></a>
 </body>
 </html>
