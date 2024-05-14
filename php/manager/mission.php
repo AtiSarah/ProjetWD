@@ -52,5 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="type" name="type" required><br><br>
         <input type="submit" name="submit" value="Set Vehicle">
     </form>
+    <a href='manager.php'><button>cancel</button></a>
 </body>
 </html>

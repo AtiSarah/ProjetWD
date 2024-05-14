@@ -31,8 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 </head>
 <body>
     <h2>Delete Mission</h2>
-    <a href="mission.php"><button>Add Mission</button></a>
-    <br><br>
+    <br>
 
     <?php
     // Include the database connection file
@@ -85,6 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     // Close the database connection
     mysqli_close($link);
+    echo "<a href='manager.php'><button>done</button></a>";
+    
     ?>
 </body>
 </html>
