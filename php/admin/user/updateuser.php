@@ -19,16 +19,29 @@
 
         // Check if the confirmation has been submitted
         if (isset($_POST['confirmUpdate'])) {
-            // Hash the password only if provided
-            $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
+            // Check if the new email already exists in the database
+            $check_email_query = "SELECT * FROM user WHERE email = ? AND id <> ?";
+            $check_email_stmt = $link->prepare($check_email_query);
+            $check_email_stmt->bind_param("si", $email, $id);
+            $check_email_stmt->execute();
+            $result = $check_email_stmt->get_result();
 
-            // Update the user details in the database
-            $updateSql = $link->prepare("UPDATE user SET email=?, pass=? WHERE id=?");
-            $updateSql->bind_param("ssi", $email, $password, $id);
-            $updateSql->execute();
-            $updateSql->close();
+            if ($result->num_rows > 0) {
+                // Email already exists for another user, display error message
+                echo "Email already exists in the database.";
+            } else {
+                // Email does not exist for any other user, proceed with the update
+                // Hash the password only if provided
+                $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
 
-            echo "User updated successfully.";
+                // Update the user details in the database
+                $updateSql = $link->prepare("UPDATE user SET email=?, pass=? WHERE id=?");
+                $updateSql->bind_param("ssi", $email, $password, $id);
+                $updateSql->execute();
+                $updateSql->close();
+
+                echo "User updated successfully.";
+            }
         } else {
             // Display confirmation message
             echo "<script>
