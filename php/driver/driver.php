@@ -1,7 +1,15 @@
 <?php
 session_start();
 include("../dbp.php"); 
-$id = $_GET['id'];
+
+// Vérifie si la session n'est pas définie
+if(!isset($_SESSION["id"]))
+{  
+    // Redirige vers la page de connexion avec un message d'erreur
+    header("location: login.php?error=Veuillez vous connecter pour accéder à cette page.");
+    exit; // Assurez-vous d'arrêter l'exécution du script après la redirection
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +23,10 @@ $id = $_GET['id'];
     <div class="sidebar">
         <h2>MENU</h2>
         <ul>
-            <li><a href="driver.php?id=<?php echo $id;?>">DASHBOARD</a></li>
-            <li><a href="incidentals.php?id=<?php echo $id;?>">INCIDENTALS</a></li>
+            <li><a href="driver.php">DASHBOARD</a></li>
+            <li><a href="incidentals.php">INCIDENTALS</a></li>
             
-            <li><a href="account.php?id=<?php echo $id;?>">ACCOUNT</a></li>
+            <li><a href="account.php">ACCOUNT</a></li>
         </ul>
     </div>
     <div id="DASHBOARD">
