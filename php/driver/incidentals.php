@@ -1,7 +1,12 @@
 <?php
 session_start();
 include("../dbp.php"); 
-$id = $_GET['id'];
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+$id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +20,13 @@ $id = $_GET['id'];
     <div class="sidebar">
 <h2>MENU </h2>
 <ul>
-    <li><a href="driver.php?id=<?php echo $id;?>">DASHBOARD</a></li>
-    <li><a href="incidentals.php?id=<?php echo $id;?>">INCIDENTALS</a></li>
-    <li><a href="account.php?id=<?php echo $id;?>">ACCOUNT</a></li></ul>
+    <li><a href="driver.php">DASHBOARD</a></li>
+    <li><a href="incidentals.php">INCIDENTALS</a></li>
+    <li><a href="account.php">ACCOUNT</a></li></ul>
 </ul>
 
 <div id="frais-imprevus">
-    <form action="" name="imprevus">
+    <form action="post" name="imprevus">
         <legend><strong>Incidentals</strong></legend>
         <input type="text" placeholder="enter incidentals..."><br>
         <input type="number" placeholder="enter amount..."><br>

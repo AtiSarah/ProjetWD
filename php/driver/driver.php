@@ -1,7 +1,19 @@
 <?php
 session_start();
 include("../dbp.php"); 
-$id = $_GET['id'];
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+$id = $_SESSION['user_id'];
+
+// Si le bouton Disconnect est cliqué, déconnectez l'utilisateur et redirigez-le vers la page de connexion
+if (isset($_POST['disconnect'])) {
+    session_destroy();
+    header("Location: ../login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +27,15 @@ $id = $_GET['id'];
     <div class="sidebar">
         <h2>MENU</h2>
         <ul>
-            <li><a href="driver.php?id=<?php echo $id;?>">DASHBOARD</a></li>
-            <li><a href="incidentals.php?id=<?php echo $id;?>">INCIDENTALS</a></li>
-            
-            <li><a href="account.php?id=<?php echo $id;?>">ACCOUNT</a></li>
+            <li><a href="driver.php">DASHBOARD</a></li>
+            <li><a href="incidentals.php">INCIDENTALS</a></li>
+            <li><a href="account.php">ACCOUNT</a></li>
+            <li>
+                <!-- Formulaire pour le bouton Disconnect -->
+                <form method="post">
+                    <button type="submit" name="disconnect">Disconnect</button>
+                </form>
+            </li>
         </ul>
     </div>
     <div id="DASHBOARD">
