@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 // Query to select all records from the mission table
 $sql = "SELECT id_mission, id_driver, id_vehicle, departure_city, arrival_city, departure_date, duration, cost, type FROM mission";
 

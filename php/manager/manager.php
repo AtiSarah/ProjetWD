@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,5 +1,12 @@
 <?php
-include("../dbp.php");
+session_start();
+include("../dbp.php"); 
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+
 
 // Sélectionnez toutes les données des véhicules depuis la base de données
 $sql = "SELECT id_vehicle, immatriculation, type, license_type, brand, state FROM vehicle";

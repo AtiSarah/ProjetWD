@@ -17,7 +17,7 @@
     header("Location: ../error.php");
     exit();
     }
-    $id = $_SESSION['user_id'];
+    
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $id_mission = $_POST['id_mission'];

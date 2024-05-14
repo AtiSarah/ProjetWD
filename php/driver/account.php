@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $id = $_SESSION['user_id'];
-echo "VOILAAAA $id";
 ?>
 <!DOCTYPE html>
 <html lang="en">

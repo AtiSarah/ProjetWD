@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 
 // Si le bouton Disconnect est cliqué, déconnectez l'utilisateur et redirigez-le vers la page de connexion
 if (isset($_POST['disconnect'])) {

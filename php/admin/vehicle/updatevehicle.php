@@ -17,7 +17,13 @@
 
     <?php
     session_start();
-    include("../dbp.php");
+    include("../dbp.php"); 
+    if (!isset($_SESSION['user_id'])) {
+        session_destroy();
+        header("Location: ../error.php");
+        exit();
+    }
+    
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $id_vehicle = $_POST['id_vehicle'];

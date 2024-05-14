@@ -1,6 +1,12 @@
 <?php
 session_start();
-include("../dbp.php"); // Inclure votre fichier de connexion à la base de données
+include("../dbp.php"); 
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {

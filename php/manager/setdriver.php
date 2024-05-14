@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 
 if(isset($_POST['selected_vehicle'])) {
     $id_vehicle = $_POST['selected_vehicle'];
