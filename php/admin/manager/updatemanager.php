@@ -1,12 +1,6 @@
 <?php
 session_start();
 include("../dbp.php");
-
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page or display an error message
-    header("Location: login.php");
-    exit(); // Stop script execution
-}
 echo "<h1>Update Manager</h1>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update'])) {
