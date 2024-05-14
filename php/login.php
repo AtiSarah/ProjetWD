@@ -17,16 +17,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['pass'])) {
             // Authentification réussie, démarrer la session
-            $_SESSION['user_id'] = $row['id_driver'];
+            
+           
             if ($row['profile'] == 0) {
+              $_SESSION['user_id'] = $row['id_driver'];
                 // Redirection vers l'interface manager
                 header("Location: manager/interface_mission.php");
             } else if ($row['profile'] == 1){
+              $_SESSION['user_manager'] = $row['id_manager'];
                 // Redirection vers l'interface driver
-                $id = $row['id'];
-                header("Location: driver/driver.php?id=$id");
+              
+                header("Location: driver/driver.php");
             }
+           
             else{
+              $_SESSION['user_admin'] =3;
               header("Location: admin/admin.php");
             }
             exit();
