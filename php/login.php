@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($row['profile'] == 0) {
               $_SESSION['user_id'] = $row['id_driver'];
                 // Redirection vers l'interface manager
-                header("Location: manager/interface_mission.php");
+                header("Location: manager/mission.php");
             } else if ($row['profile'] == 1){
               $_SESSION['user_manager'] = $row['id_manager'];
                 // Redirection vers l'interface driver
