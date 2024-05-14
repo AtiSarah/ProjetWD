@@ -1,6 +1,12 @@
 <?php
-// Include the database connection file
-include("../dbp.php");
+session_start();
+include("../dbp.php"); 
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+$id = $_SESSION['user_id'];
 
 // Query to select all records from the manager table
 $sql = "SELECT id_manager, id, firstname, lastname, datenaiss, phone FROM manager";

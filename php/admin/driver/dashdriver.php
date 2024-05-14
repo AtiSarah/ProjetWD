@@ -1,5 +1,12 @@
 <?php
-include("../dbp.php");
+session_start();
+include("../dbp.php"); 
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
+}
+$id = $_SESSION['user_id'];
 
 // Sélectionnez toutes les données des conducteurs depuis la base de données
 $sql = "SELECT d.id_driver, d.id, d.firstname, d.lastname, d.datenaiss, d.phone, d.license_type 
