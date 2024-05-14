@@ -31,3 +31,4 @@ $id = $_GET['id'];
 </div>
 </body>
 </html>
+<!-- select from mission where iduser that is connected == iduser in mission -->
