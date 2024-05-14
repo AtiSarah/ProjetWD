@@ -18,16 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['pass'])) {
             // Authentification réussie, démarrer la session
             
-           
+            $id = $row['id'];
             if ($row['profile'] == 0) {
-              $_SESSION['user_id'] = $row['id_driver'];
+             
                 // Redirection vers l'interface manager
-                header("Location: manager/manager.php");
+                header("Location: manager/manager.php?id=$id");
             } else if ($row['profile'] == 1){
-              $_SESSION['user_manager'] = $row['id_manager'];
+              
                 // Redirection vers l'interface driver
               
-                header("Location: driver/driver.php");
+                header("Location: driver/driver.php?id=$id");
             }
            
             else{
