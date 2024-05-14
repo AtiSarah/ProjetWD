@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $id = $_SESSION['user_id'];
+echo "VOILAAAA $id";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,7 @@ $id = $_SESSION['user_id'];
 
 <div class="mission-details"><h3>Personal Information: </h3><br>
 <?php
+
 $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
 $sql->bind_param("i", $id);
 $sql->execute();
@@ -33,10 +35,11 @@ $result = $sql->get_result();
 $row = $result->fetch_assoc();
 ?>
 
-    <label id="name">First Name: <?php echo $row['firstname']; ?></label><br>
+    <label  id="name">First Name: <?php echo $row['firstname']; ?></label><br>
     <label id="firstname">Last Name: <?php echo $row['lastname']; ?></label><br>
-    <label id=" LicenseType "> License Type :<?php echo $row['license_type']; ?> </label><br>
-    <label id="code-employee">Employee Code:<?php echo $row['firstname']; ?> </label><br>
+    <label id="licenseType"> License Type :<?php echo $row['license_type']; ?> </label><br>
+    <label id="date of birth"> License Type :<?php echo $row['datenaiss']; ?> </label><br>
+    <label id="phone">Employee Code:<?php echo $row['phone']; ?> </label><br>
 </div>
 </div>
 </body>
