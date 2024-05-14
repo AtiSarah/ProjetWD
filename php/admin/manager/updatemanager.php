@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 include("../dbp.php");
 echo "<h1>Update Manager</h1>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

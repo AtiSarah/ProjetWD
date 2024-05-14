@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-$id = $_SESSION['user_id'];
+
 
 // Query to select all records from the user table
 $sql = "SELECT id, email, profile FROM user";
