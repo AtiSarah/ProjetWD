@@ -9,88 +9,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $password = $_POST['password'];
             $profile = $_POST['profile'];
 
-            // Hash the password 
-            $pwd_hash = password_hash($password, PASSWORD_DEFAULT);
+            // Vérifier si l'e-mail existe déjà dans la base de données
+            $check_email_query = "SELECT * FROM user WHERE email = ?";
+            $check_email_stmt = $link->prepare($check_email_query);
+            $check_email_stmt->bind_param("s", $email);
+            $check_email_stmt->execute();
+            $result = $check_email_stmt->get_result();
 
-            // Insert the user data
-            $sql = $link->prepare("INSERT INTO user (email, pass, profile) VALUES (?, ?, ?)");
-            $sql->bind_param("sss", $email, $pwd_hash, $profile);
-            $sql->execute();
+            if ($result->num_rows > 0) {
+                // L'e-mail existe déjà, afficher un message d'erreur ou effectuer une autre action
+                echo "Cet e-mail existe déjà dans la base de données.";
+            } else {
+                // L'e-mail n'existe pas encore, procéder à l'insertion
 
-            // Get the ID of the inserted user
-            $user_id = $link->insert_id;
+                // Hasher le mot de passe 
+                $pwd_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            // Store user ID in session for future use
-            $_SESSION['user_id'] = $user_id;
+                // Insérer les données de l'utilisateur
+                $sql = $link->prepare("INSERT INTO user (email, pass, profile) VALUES (?, ?, ?)");
+                $sql->bind_param("sss", $email, $pwd_hash, $profile);
+                $sql->execute();
 
-            // Close the statement
-            $sql->close();
+                // Obtenir l'ID de l'utilisateur inséré
+                $user_id = $link->insert_id;
 
-            // Redirect based on the profile
-            if ($profile == 0) {
-                header("Location: ../manager/manager.php");
-                exit();
-            } elseif ($profile == 1) {
-                header("Location: ../driver/driver.php");
-                exit();
+                // Stocker l'ID de l'utilisateur en session pour une utilisation future
+                $_SESSION['user_id'] = $user_id;
+
+                // Fermer l'instruction
+                $sql->close();
+
+                // Rediriger en fonction du profil
+                if ($profile == 0) {
+                    header("Location: ../manager/manager.php");
+                    exit();
+                } elseif ($profile == 1) {
+                    header("Location: ../driver/driver.php");
+                    exit();
+                } elseif ($profile == 3) {
+                    header("Location: ../admin.php");
+                    exit();
+                }
             }
-            elseif ($profile == 3){
-                header("Location: ../admin.php");
-                exit();
-            }
-        } 
+            // Fermer l'instruction de vérification de l'e-mail
+            $check_email_stmt->close();
+        }
     }
 }
 ?>
 
-
-
-<!-- create_user_form.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="adduser.css">
-    <title>CREATE USER</title>
-</head>
-<body>
-<!-- <div class="sidebar">
-        <h2>ADMIN</h2>
-        <details>
-            <summary>DASHBOARD</summary>
-            <li><a href="dwda.php">USERS</a></li>
-            <li><a href="#">MANAGERS</a></li>
-            <li><a href="driver.html">DRIVERS</a></li>
-            <li><a href="#">VEHICLES</a></li>
-            
-        </details>
-        <details>
-            <summary>ADD</summary>
-            <li><a href="#">USERS</a></li>
-            <li><a href="#">MANAGERS</a></li>
-            <li><a href="addDriver.html">DRIVERS</a></li>   
-            <li><a href="addVehicle.html">VEHICLES</a></li>
-         
-        </details>
-        <details>
-            <summary>EDIT</summary>
-            <li><a href="#">USERS</a></li>
-            <li><a href="#">MANAGERS</a></li>
-            <li><a href="#">DRIVERS</a></li>   
-            <li><a href="#">VEHICLES</a></li>
-         
-        </details>
-        <details>
-            <summary>DELETE</summary>
-            <li><a href="#">USERS</a></li>
-            <li><a href="#">MANAGERS</a></li>
-            <li><a href="#">DRIVERS</a></li>
-            <li><a href="#">VEHICLES</a></li>
-         
-        </details>
-        </ul>
-    </div> -->
     <div id="inscreption-form">
     <h2>CREATE USER :</h2>
     <form action="user.php" method="post">
