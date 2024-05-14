@@ -11,21 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cost = $_POST['cost'];
         $type = $_POST['type'];
         
-        $_SESSION['mission_added'] = true;
-        $_SESSION['departure_city'] = $departureCity;
-        $_SESSION['departure_date'] = $departureDate;
-        $_SESSION['user_id'] = $user_id;
-        $_SESSION['arrival_city'] = $arrivalCity;
-        $_SESSION['duration'] = $duration;
-        $_SESSION['cost'] = $cost;
-        $_SESSION['type'] = $type;  
-        header("Location: ./Setvehicle.php");
-        exit();
-            } else {
-                echo "<p>Error adding mission. Please try again.</p>";}
-    } 
-
-
+        // Check if departure date is greater than the current date
+        if (strtotime($departureDate) > time()) {
+            // Set session variables and redirect
+            $_SESSION['mission_added'] = true;
+            $_SESSION['departure_city'] = $departureCity;
+            $_SESSION['departure_date'] = $departureDate;
+            $_SESSION['user_id'] = $user_id; // Assuming $user_id is defined elsewhere
+            $_SESSION['arrival_city'] = $arrivalCity;
+            $_SESSION['duration'] = $duration;
+            $_SESSION['cost'] = $cost;
+            $_SESSION['type'] = $type;
+            header("Location: ./Setvehicle.php");
+            exit();
+        } else {
+            echo "<p>Error: Departure date should be greater than the current date.</p>";
+        }
+    } else {
+        echo "<p>Error adding mission. Please try again.</p>";
+    }
+} 
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="type" name="type" required><br><br>
         <input type="submit" name="submit" value="Set Vehicle">
     </form>
-    <a href='manager.php'><button>cancel</button></a>
+    <a href="manager.php"><button>cancel</button></a>
 </body>
 </html>

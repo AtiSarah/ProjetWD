@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 </head>
 <body>
     <h2>Delete Mission</h2>
-    <br>
+   <br>
 
     <?php
     // Include the database connection file
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             echo "<td>" . $row["duration"] . "</td>";
             echo "<td>" . $row["cost"] . "</td>";
             echo "<td>" . $row["type"] . "</td>";
-            echo "<td><form method='post' action='deletemission.php'>
+            echo "<td><form method='post' action='deletemission.php' onsubmit='return confirm(\"Are you sure you want to delete this mission?\")'>
                     <input type='hidden' name='id' value='" . $row["id_mission"] . "'>
                     <input type='submit' name='delete' value='Delete'>
                 </form></td>";
@@ -84,8 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     // Close the database connection
     mysqli_close($link);
-    echo "<a href='manager.php'><button>done</button></a>";
-    
     ?>
+    <a href="manager.php"><button>done</button></a>
 </body>
 </html>
