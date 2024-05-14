@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../dbp.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {
         if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['datenaiss']) && isset($_POST['phone'])) {
@@ -9,29 +10,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $datenaiss = $_POST['datenaiss'];
             $phone = $_POST['phone'];
 
-            // Check if user ID is available in session
-            if (isset($_SESSION['user_id'])) {
-                $user_id = $_SESSION['user_id'];
+            // Calculate the age of the manager
+            $manager_age = date_diff(date_create($datenaiss), date_create('today'))->y;
 
-                // Insert the driver data
-                $sql = $link->prepare("INSERT INTO manager (id, firstname, lastname, datenaiss, phone) VALUES (?, ?, ?, ?, ?)");
-                $sql->bind_param("issss", $user_id, $firstname, $lastname, $datenaiss, $phone);
-                $sql->execute();
-
-                // Close the statement
-                $sql->close();
-
-                // Redirect to appropriate page after insertion
-                header("Location: ../admin.php"); // Adjust the location if needed
-                exit();
+            // Check if the manager is at least 19 years old
+            if ($manager_age < 19) {
+                // Display a message that the manager must be at least 19 years old
+                echo "This manager must be at least 19 years old.";
             } else {
-                // Handle error if user ID is not available in session
-                echo "User ID not found. Please insert user data first.";
+                // Check if user ID is available in session
+                if (isset($_SESSION['user_id'])) {
+                    $user_id = $_SESSION['user_id'];
+
+                    // Insert the manager data
+                    $sql = $link->prepare("INSERT INTO manager (id, firstname, lastname, datenaiss, phone) VALUES (?, ?, ?, ?, ?)");
+                    $sql->bind_param("issss", $user_id, $firstname, $lastname, $datenaiss, $phone);
+                    $sql->execute();
+
+                    // Close the statement
+                    $sql->close();
+
+                    // Redirect to appropriate page after insertion
+                    header("Location: ../admin.php"); // Adjust the location if needed
+                    exit();
+                } else {
+                    // Handle error if user ID is not available in session
+                    echo "User ID not found. Please insert user data first.";
+                }
             }
         } 
     }
 }
 ?>
+
 
 
 <!-- create_user_form.php -->
