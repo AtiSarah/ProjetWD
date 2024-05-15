@@ -24,6 +24,7 @@ $row = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
     <link rel="stylesheet" href="test.css">
     <style>
         /* Insérer ici le code CSS fourni */
@@ -52,7 +53,7 @@ $row = $result->fetch_assoc();
             </div>
             <ul>
                 <li>
-                    <a href="#" class="active">
+                    <a href="test.php" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">DASHBOARD</span>
                     </a>
@@ -71,7 +72,7 @@ $row = $result->fetch_assoc();
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="account.php">
                         <span class="icon"><i class="fa-solid fa-user"></i></span>
                         <span class="item">ACCOUNT</span>
                     </a>
