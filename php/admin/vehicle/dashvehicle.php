@@ -41,13 +41,10 @@
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-        <li><a href="../user/dashuser.php">User</a></li>
-          <li><a href="../driver/driver.php">Driver</a></li>
-          <li><a href="../manager/manager.php">Manager</a></li>
+        <li><a href="../user/user.php">User</a></li>
           <li><a href="vehicle.php">Vehicle</a></li>
         </ul>
       </li>
-      <li>
      <li> <!--DELETE -->     
        <div class="iocn-link">
          <a href="#">
@@ -73,7 +70,7 @@
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="updateuser.php">User</a></li>
+       <li><a href="../user/updateuser.php">User</a></li>
          <li><a href="../driver/updatedriver.php">Driver</a></li>
          <li><a href="../manager/updatemanager.php">Manager</a></li>
          <li><a href="updatevehicle.php">Vehicle</a></li>
