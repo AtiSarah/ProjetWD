@@ -93,7 +93,7 @@ $row = $result->fetch_assoc();
 <div class="update_mission">
     <!-- UPDATE MISSION-->
     <?php
-
+    echo"<h1>Update Mission:</h1>";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $id_mission = $_POST['id_mission'];
         $departure_city = $_POST['departure_city'];

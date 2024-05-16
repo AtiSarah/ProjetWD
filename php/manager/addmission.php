@@ -143,7 +143,7 @@ $row = $result->fetch_assoc();
     </div>
     <!-- Add Mission-->
    <div class="add-mission">
-    <h2>Add Mission:</h2>
+   <h1>Add Mission:</h1>
     <form method="post">
         <label for="departure_city">Departure City:</label><br>
         <input type="text" id="departure_city" name="departure_city" required><br><br>
