@@ -54,8 +54,6 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <ul class="sub-menu">
         <li><a href="user/user.php">User</a></li>
-          <li><a href="driver/driver.php">Driver</a></li>
-          <li><a href="manager/manager.php">Manager</a></li>
           <li><a href="vehicle/vehicle.php">Vehicle</a></li>
         </ul>
       </li>
