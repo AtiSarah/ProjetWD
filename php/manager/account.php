@@ -6,9 +6,8 @@ if (!isset($_SESSION['user_id'])) {
     session_destroy();
     header("Location: ../error.php");
     exit();
-}
-$id = $_SESSION['user_id'];
-$sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
+}$id = $_SESSION['user_id'];
+$sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
 $sql->bind_param("i", $id);
 $sql->execute();
 $result = $sql->get_result();
@@ -36,25 +35,27 @@ $row = $result->fetch_assoc();
     </div>
     <ul class="nav-links">
       <li>
-        <a href="driver.php"><!-- DASHBOARD-->
+        <a href="dashmission.php"><!-- DASHBOARD MISSION-->
           <i class='bx bx-grid-alt' ></i>
           <span class="link_name">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="driver.php">Dashboard</a></li>
+          <li><a class="link_name" href="dashmission.php">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
-          <a href="mission.php">
+          <a href="#">
             <i class='bx bx-collection' ></i>
             <span class="link_name">Mission</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a href="mission.php">View Mission</a></li><!-- MISSION-->
-          <li><a href="incidentals.php">Add Incidentals</a></li><!-- ADD INCIDENTALS-->
+        <li><a href="addmission.php">Add Mission</a></li><!-- ADD MISSION-->
+          <li><a href="updatemission.php">Update Mission</a></li><!-- UPDATE INCIDENTALS-->
+          <li><a href="deletemission.php">Delete Mission</a></li><!-- DELETE MISSION-->
+          
         </ul>
       </li>
       <li>
@@ -69,12 +70,12 @@ $row = $result->fetch_assoc();
       <li>
     <div class="profile-details">
       <div class="profile-content">
-      <img src="../../html/img/driver.PNG" alt="profileImg">
+      <img src="../../html/img/manager.PNG" alt="profileImg">
       </div>
       <div class="name-job">
       <h3 id="name"></h3>
         <div class="profile_name"><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></div>
-        <div class="job">Driver</div>
+        <div class="job">Manager</div>
       </div>
 <a href="../disconnect.php" class="logout-link">
     <i class='bx bx-log-out'></i>
@@ -88,11 +89,11 @@ $row = $result->fetch_assoc();
       <i class='bx bx-menu' ></i>
       <span class="text"></span>
     </div>
-    <!-- Information driver-->
- <div class="info-driver">
+    <!-- Information manager-->
+ <div class="info-manager">
         <h3>Personal Information: </h3><br>
             <?php
-                $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
+                $sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
                 $sql->bind_param("i", $id);
                 $sql->execute();
                 $result = $sql->get_result();
@@ -100,7 +101,6 @@ $row = $result->fetch_assoc();
             ?>
         <label  id="name">First Name: <?php echo $row['firstname']; ?></label><br>
         <label id="firstname">Last Name: <?php echo $row['lastname']; ?></label><br>
-        <label id="licenseType"> License Type : <?php echo $row['license_type']; ?> </label><br>
         <label id="date of birth"> Date of birth : <?php echo $row['datenaiss']; ?> </label><br>
         <label id="phone">Phone: <?php echo $row['phone']; ?> </label><br>
     </div>
@@ -128,6 +128,18 @@ $row = $result->fetch_assoc();
 </html>
 
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

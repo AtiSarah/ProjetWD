@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($row['profile'] == 0) {
              
                 // Redirection vers l'interface manager
-                header("Location: manager/manager.php");
+                header("Location: manager/account.php");
             } else if ($row['profile'] == 1){
               
                 // Redirection vers l'interface driver

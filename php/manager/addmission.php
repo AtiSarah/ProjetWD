@@ -7,7 +7,57 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-//home page affichage
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['submit'])) {
+if (!empty($_POST['departure_city']) && !empty($_POST['arrival_city']) && !empty($_POST['departure_date']) && !empty($_POST['duration']) && !empty($_POST['cost']) && !empty($_POST['type'])) {
+  
+        $departureCity = $_POST['departure_city'];
+        $arrivalCity = $_POST['arrival_city'];
+        $departureDate = $_POST['departure_date'];
+        $duration = $_POST['duration'];
+        $cost = $_POST['cost'];
+        $type = $_POST['type'];
+        
+        // Check if departure date is greater than the current date
+        if (strtotime($departureDate) >= time()) {
+            // Set session variables and redirect
+            $_SESSION['mission_added'] = true;
+            $_SESSION['departure_city'] = $departureCity;
+            $_SESSION['departure_date'] = $departureDate;
+            $_SESSION['arrival_city'] = $arrivalCity;
+            $_SESSION['duration'] = $duration;
+            $_SESSION['cost'] = $cost;
+            $_SESSION['type'] = $type;
+            header("Location: setvehicle.php");
+            exit();
+        } else {
+
+
+          echo '<script>
+          window.onload = function() {
+              alert("Departure date should be greater than the current date!");
+          }
+        </script>';
+        }
+           }
+        
+            
+        
+     else {
+
+
+      echo '<script>
+      window.onload = function() {
+          alert("Error adding mission. Please try again!");
+      }
+    </script>';
+    }
+                  
+    }}
+
+
+
+//home page info
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
 $sql->bind_param("i", $id);
@@ -23,7 +73,7 @@ $row = $result->fetch_assoc();
   <head>
     <meta charset="UTF-8">
     <title>Account</title>
-    <link rel="stylesheet" href="setvehicle.css">
+    <link rel="stylesheet" href="addmission.css">
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -91,9 +141,31 @@ $row = $result->fetch_assoc();
       <i class='bx bx-menu' ></i>
       <span class="text"></span>
     </div>
+    <!-- Add Mission-->
+   <div class="add-mission">
+    <h2>Add Mission:</h2>
+    <form method="post">
+        <label for="departure_city">Departure City:</label><br>
+        <input type="text" id="departure_city" name="departure_city" required><br><br>
+        <label for="arrival_city">Arrival City:</label><br>
+        <input type="text" id="arrival_city" name="arrival_city" required><br><br>
+        <label for="departure_date">Departure Date:</label><br>
+        <input type="date" id="departure_date" name="departure_date" required><br><br>
+        <label for="duration">Duration (min):</label><br>
+        <input type="number" id="duration" name="duration" required><br><br>
+        <label for="cost">Cost:</label><br>
+        <input type="number" id="cost" name="cost" required><br><br>
+        <label for="state">Type:</label><br>
+        <input type="text" id="type" name="type" required><br><br>
+        <input type="submit" name="submit" value="Set Vehicle">
+        <input type="reset" name="cancel" value="Cancel">
+    </form>
+    </div>
+  </section>
+
  
-<div class="Set-vehicle">
-<script>
+
+  <script>
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e)=>{
@@ -108,69 +180,43 @@ $row = $result->fetch_assoc();
     sidebar.classList.toggle("close");
   });
   </script>
-
+</body>
 
 </html>
- <!-- SET VEHICLE-->
-<?php
-    if (isset($_SESSION['mission_added']) && $_SESSION['mission_added'] === true) {
-    // Sélectionnez toutes les données des véhicules depuis la base de données
-    $sql = "SELECT id_vehicle, immatriculation, type, license_type, brand, state FROM vehicle";
-    $result = $link->query($sql);
-
-    // Vérifiez s'il y a des données disponibles
-    if ($result->num_rows > 0) {
-        echo "<h1>Vehicle:</h1>";
-        // Démarrez la sortie du formulaire pour sélectionner un véhicule
-        echo "<form action='setdriver.php' method='post'>";
-        // Démarrez la sortie du tableau HTML
-        echo "<table border='1'>
-        <tr>
-        <th>ID Vehicle</th>
-        <th>Immatriculation</th>
-        <th>Type</th>
-        <th>License Type</th>
-        <th>Brand</th>
-        <th>State</th>
-        <th>Action</th>
-        </tr>";
-
-        // Sortie des données de chaque ligne
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["id_vehicle"] . "</td>";
-            echo "<td>" . $row["immatriculation"] . "</td>";
-            echo "<td>" . $row["type"] . "</td>";
-            echo "<td>" . $row["license_type"] . "</td>";
-            echo "<td>" . $row["brand"] . "</td>";
-            echo "<td>" . $row["state"] . "</td>";
-            // Ajoutez un bouton pour sélectionner ce véhicule
-            echo "<td><button type='submit' name='selected_vehicle' value='" . $row["id_vehicle"] . "'>Set Driver</button></td>";
-            //envoyer id_vehicle a setdriver 
-            echo "</tr>";
-        }
-        // Fin du tableau HTML
-        echo "</table>";
-        // Fermez le formulaire
-        echo "</form>";
-    } else {
-        echo "0 results"; // Si aucune donnée n'est disponible
-    }
-    $link->close();
-    echo '<a href="addmission.php"><button>Cancel</button></a>';
- 
-}else{ //revenir a l'ajout de mission
-  header("Location: addmission.php");
-  
-}
-?>
-</div>
-</body>
- </section>
- 
-
- 
-
-  
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
