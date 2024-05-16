@@ -102,7 +102,7 @@
 <!--DASH-MANAGER-->
  <div class="update-user">
 <?php
-echo  "<h1>Update User</h1>";
+echo  "<h1>Update User:</h1>";
 session_start();
 include("../dbp.php"); 
 if (!isset($_SESSION['user_id'])) {
