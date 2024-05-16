@@ -105,7 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="../user/deleteuser.php">User</a></li>
          <li><a href="../driver/deletedriver.php">Driver</a></li>
          <li><a href="deletemanager.php">Manager</a></li>
          <li><a href="../vehicle/deletevehicle.php">Vehicle</a></li>

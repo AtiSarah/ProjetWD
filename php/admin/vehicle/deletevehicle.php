@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Account</title>
-    <link rel="stylesheet" href="dashvehicle.css">
+    <link rel="stylesheet" href="deletevehicle.css">
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -57,7 +57,6 @@
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="../user/deleteuser.php">User</a></li>
          <li><a href="../driver/deletedriver.php">Driver</a></li>
          <li><a href="../manager/deletemanager.php">Manager</a></li>
          <li><a href="deletevehicle.php">Vehicle</a></li>
@@ -73,7 +72,7 @@
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="updateuser.php">User</a></li>
+       <li><a href="../user/updateuser.php">User</a></li>
          <li><a href="../driver/updatedriver.php">Driver</a></li>
          <li><a href="../manager/updatemanager.php">Manager</a></li>
          <li><a href="../vehicle/updatevehicle.php">Vehicle</a></li>
@@ -102,14 +101,14 @@
       <span class="text"></span>
     </div>
     
-<!--UPDATE VEHICLE-->
- <div class="dash-vehicle">
+<!--DELETE VEHICLE-->
+ <div class="delete-vehicle">
  <?php
 session_start();
 include("../dbp.php"); 
 if (!isset($_SESSION['user_id'])) {
     session_destroy();
-    header("Location: ../error.php");
+    header("Location: ../../error.php");
     exit();
 }
 
@@ -132,14 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
         echo "Cannot delete vehicle. It is associated with existing missions.";
     }
 }
-
-// Include the database connection file
-include("../dbp.php");
+echo "<h1>Delete vehicle:</h1>";
 
 // Query to select all records from the vehicle table
 $sql = "SELECT * FROM vehicle";
 $result = $link->query($sql);
-echo "<h2>Delete vehicle</h2>";
+
 // Check if there are any records returned
 if ($result && $result->num_rows > 0) {
     // Table header
@@ -165,7 +162,7 @@ if ($result && $result->num_rows > 0) {
         echo "<td>" . htmlspecialchars($row["license_type"]) . "</td>";
         echo "<td><form method='post' onsubmit='return confirm(\"Are you sure you want to delete this vehicle?\")' action='deletevehicle.php'>
                 <input type='hidden' name='id' value='" . $row["id_vehicle"] . "'>
-                <input type='submit' name='delete' value='Delete'>
+                <input type='submit' name='delete' value='Delete' class='delete-btn'>
             </form></td>";
         echo "</tr>";
     }

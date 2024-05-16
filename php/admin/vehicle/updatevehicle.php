@@ -70,7 +70,6 @@
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="../user/updateuser.php">User</a></li>
          <li><a href="../driver/updatedriver.php">Driver</a></li>
          <li><a href="../manager/updatemanager.php">Manager</a></li>
          <li><a href="updatevehicle.php">Vehicle</a></li>
@@ -141,9 +140,9 @@
     // Fetch all vehicles from the database
     $sql = "SELECT * FROM vehicle";
     $result = $link->query($sql);
-
+    echo"<h1>Update vehicle:</h1>";
     if ($result && $result->num_rows > 0) {
-        echo"<h1>Update vehicle:</h1>";
+       
         echo "<table border='1'>";
         echo "<tr>
                 <th>ID</th>
