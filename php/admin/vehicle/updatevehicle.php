@@ -73,10 +73,10 @@
          <i class='bx bxs-chevron-down arrow' ></i>
        </div>
        <ul class="sub-menu">
-       <li><a href="updateuser.php">User</a></li>
+       <li><a href="../user/updateuser.php">User</a></li>
          <li><a href="../driver/updatedriver.php">Driver</a></li>
          <li><a href="../manager/updatemanager.php">Manager</a></li>
-         <li><a href="../vehicle/updatevehicle.php">Vehicle</a></li>
+         <li><a href="updatevehicle.php">Vehicle</a></li>
        </ul>
      </li>
      <li>
@@ -174,7 +174,7 @@
                         <input type='text' name='license_type' value='" . $row['license_type'] . "'>
                         <input type='text' name='brand' value='" . $row['brand'] . "'>
                         <input type='text' name='state' value='" . $row['state'] . "'>
-                        <input type='submit' name='update' value='Update' onclick='return confirmUpdate(); '>
+                        <input type='submit' name='update' value='Update' onclick='return confirmUpdate();' class='update-button'>
                         <input type='hidden' name='confirmUpdate' value='true'>
                     </form>
                 </td>";

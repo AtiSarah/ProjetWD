@@ -43,7 +43,7 @@
         <ul class="sub-menu">
         <li><a href="../user/user.php">User</a></li>
           <li><a href="../driver/driver.php">Driver</a></li>
-          <li><a href=".manager.php">Manager</a></li>
+          <li><a href="manager.php">Manager</a></li>
           <li><a href="../vehicle/vehicle.php">Vehicle</a></li>
         </ul>
       </li>
@@ -108,7 +108,7 @@ session_start();
 include("../dbp.php"); 
 if (!isset($_SESSION['user_id'])) {
     session_destroy();
-    header("Location: ../error.php");
+    header("Location: ../../error.php");
     exit();
 }
 $id = $_SESSION['user_id'];

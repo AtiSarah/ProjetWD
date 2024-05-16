@@ -76,7 +76,7 @@
        <li><a href="updateuser.php">User</a></li>
          <li><a href="../driver/updatedriver.php">Driver</a></li>
          <li><a href="../manager/updatemanager.php">Manager</a></li>
-         <li><a href="../vehicle/updatevehicle.php">Vehicle</a></li>
+         <li><a href="updatevehicle.php">Vehicle</a></li>
        </ul>
      </li>
      <li>
