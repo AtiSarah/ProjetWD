@@ -124,35 +124,6 @@ $row = $result->fetch_assoc();
   });
   </script>
 </body>
-
 </html>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

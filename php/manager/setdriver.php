@@ -6,7 +6,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
-
 //home page affichage
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
@@ -15,9 +14,6 @@ $sql->execute();
 $result = $sql->get_result();
 $row = $result->fetch_assoc();
 ?>
-
-
-
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
@@ -146,12 +142,13 @@ if(isset($_POST['selected_vehicle'])) {
                 echo "<td>" . $row["datenaiss"] . "</td>";
                 echo "<td>" . $row["phone"] . "</td>";
                 echo "<td>" . $row["license_type"] . "</td>";
-                echo "<td><form action='setdriver.php' method='post'> <!-- Utilisez le même fichier pour l'action -->
+                echo "<td><form action='' method='post' onclick='return confirmMission()'>
                 <input type='hidden' name='selected_driver' value='" . $row["id_driver"] . "'>
                 <input type='hidden' name='selected_vehicle' value='" . $id_vehicle . "'>
-                <button type='submit' name='confirm_mission'>Confirm</button> <!-- Renommez le bouton pour indiquer la confirmation de la mission -->
+                <button type='submit' name='confirm_mission' >Confirm</button>
                 </form></td>";
                  echo "</tr>";
+               
             }
             // Fin du tableau HTML
             echo "</table>";
@@ -180,17 +177,12 @@ if(isset($_POST['selected_vehicle'])) {
         $sql = "INSERT INTO mission (id_driver, id_vehicle, departure_city, arrival_city, departure_date, duration, cost, type) 
                 VALUES ('$id_driver', '$id_vehicle', '$departureCity', '$arrivalCity', '$departureDate', '$duration', '$cost', '$type')";
 
-        if ($link->query($sql) === TRUE) {
-            header("Location: manager.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . $link->error;
+        if (!$link->query($sql) === TRUE) {
+          echo "Error: " . $sql . "<br>" . $link->error;
         }
-
+            
     }
-
     $link->close();
-    
-   
 } else {
     echo "Vehicle ID not found in session.";
 }
@@ -198,7 +190,18 @@ if(isset($_POST['selected_vehicle'])) {
 
 </div>
 </section>
+    
 <script>
+  function confirmMission() {
+    // Afficher une boîte de dialogue d'alerte pour la confirmation
+    if (confirm("Are you sure you want to send this mission?")) {
+      return true;
+    }
+   
+    return false;
+  }
+
+
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e)=>{
@@ -215,34 +218,3 @@ if(isset($_POST['selected_vehicle'])) {
   </script>
 </body>
 </html>
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

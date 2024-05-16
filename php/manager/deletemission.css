@@ -211,7 +211,7 @@
 .home-section{
   position: relative;
   background: #E4E9F7;
-  height: 140vh;
+  height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
@@ -239,62 +239,64 @@
   font-weight: 600;
 }
 
+
 .info-manager {
-    /* Add your styles here */
-    margin-top: 0;
-    padding: 20px;
-  
-    border-radius: 10px;
-  }
-  .info-manager h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .info-manager label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
+  /* Add your styles here */
+  margin-top: 0;
+  padding: 20px;
 
-/* Appliquer les mêmes styles et positions à la classe add-mission */
+  border-radius: 10px;
+}
+.info-manager h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.info-manager label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+}
 
-.add-mission {
+
+.delete-mission {
+  /* Copiez les styles de la classe .dash-mission ici */
   margin-top: 0;
   padding: 20px;
   border-radius: 10px;
 }
 
-.add-mission legend {
-  font-size: 18px;
+.delete-mission h1 {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
-.add-mission input[type="text"],
-.add-mission input[type="number"] {
-  font-size: 16px;
-  margin-bottom: 10px;
+.delete-mission table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.delete-mission th,
+.delete-mission td {
+  border: 1px solid #dddddd;
+  text-align: left;
   padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 50%; /* pour occuper toute la largeur */
+  background-color: #f9f9f9;
 }
 
-.add-mission input[type="submit"],
-.add-mission input[type="reset"] {
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: rgb(17, 16, 29);
-  color: white;
-  cursor: pointer;
-  margin-right: 10px;
+.delete-mission th {
+  background-color: #f2f2f2;
 }
 
-.add-mission input[type="submit"]:hover,
-.add-mission input[type="reset"]:hover {
-  background-color: #daa145; /* couleur au survol */
+.delete-mission-btn {
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Rembourrage (haut et bas, gauche et droite) */
+  font-size: 16px; /* Taille de la police */
+  border: none; /* Supprime la bordure */
+  border-radius: 5px; /* Ajoute des coins arrondis */
+  cursor: pointer; /* Change le curseur en main */
+  margin-top: 10px; /* Marge en haut */
 }
 
 
