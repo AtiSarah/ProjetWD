@@ -6,6 +6,9 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+body{
+  background: #E4E9F7 ;
+}
 .sidebar{
   position: fixed;
   top: 0;
@@ -239,8 +242,44 @@
   font-weight: 600;
 }
 
+.update-driver {
+  margin-top: 0;
+  padding: 20px;
+  border-radius: 10px;
+}
 
+.update-driver h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
 
+.update-driver table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.update-driver th,
+.update-driver td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  background-color: #f9f9f9;
+}
+
+.update-driver th {
+  background-color: #f2f2f2;
+}
+.update-driver input[type="submit"] {
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Rembourrage (haut et bas, gauche et droite) */
+  font-size: 16px; /* Taille de la police */
+  border: none; /* Supprime la bordure */
+  border-radius: 5px; /* Ajoute des coins arrondis */
+  cursor: pointer; /* Change le curseur en main */
+  margin-top: 10px; /* Marge en haut */
+}
 
 @media (max-width: 400px) {
   .sidebar.close .nav-links li .sub-menu{

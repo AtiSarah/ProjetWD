@@ -16,6 +16,9 @@
   z-index: 100;
   transition: all 0.5s ease;
 }
+body{
+    background: #E4E9F7;
+}
 .sidebar.close{
   width: 78px;
 }
@@ -240,7 +243,35 @@
 }
 
 
-
+.dash-vehicle {
+    margin-top: 0;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .dash-vehicle h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .dash-vehicle table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .dash-vehicle th,
+  .dash-vehicle td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .dash-vehicle th {
+    background-color: #f2f2f2;
+  }
+  
 
 @media (max-width: 400px) {
   .sidebar.close .nav-links li .sub-menu{
