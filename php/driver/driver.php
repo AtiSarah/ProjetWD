@@ -102,7 +102,7 @@ $mission_result = $mission_sql->get_result();
       <span class="text"></span>
     </div>
 <!-- Dashboard driver-->
- <div id="Dashboard-driver">
+ <div class="Dashboard-driver">
         <table border="1"> 
             <thead>
                 <tr>
