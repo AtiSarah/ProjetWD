@@ -1,17 +1,13 @@
 <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) ||(!isset($_SESSION['profile1']) && isset($_SESSION['admin']) ) ) {
     session_destroy();
     header("Location: ../../error.php");
     exit();
 }
 
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page or display an error message
-    header("Location: login.php");
-    exit(); // Stop script execution
-}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {

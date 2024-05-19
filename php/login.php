@@ -17,24 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['pass'])) {
             // Authentification réussie, démarrer la session
-            
             $_SESSION['user_id'] = $row['id'];
-            if ($row['profile'] == 0) {
-             
-                // Redirection vers l'interface manager
-                header("Location: manager/account.php");
-            } else if ($row['profile'] == 1){
-              
-                // Redirection vers l'interface driver
-              
-                header("Location: driver/driver.php");
+            $email = strtolower($email);
+            
+            if ($email == "admin@gmail.com") {
+                $_SESSION['admin'] = 1;
+                header("Location: admin/admin.php");
+                exit();
             }
-           
-            else{
-             
-              header("Location: admin/admin.php");
+                if ($row['profile'] == 0) {
+                    $_SESSION['profile0'] = $row['profile'];
+                    // Redirection vers l'interface manager
+                    header("Location: manager/account.php");
+                    exit();
+                } elseif ($row['profile'] == 1) {
+                    $_SESSION['profile1'] = $row['profile'];
+                    // Redirection vers l'interface driver
+                    header("Location: driver/driver.php");
+                    exit();
+                }
             }
-            exit();
         } else {
             // Mot de passe incorrect
             echo "Mot de passe incorrect.";
@@ -43,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Aucun utilisateur trouvé avec cet email
         echo "Aucun utilisateur trouvé avec cet email.";
     }
-}
+
 ?>
 
 <!DOCTYPE html>

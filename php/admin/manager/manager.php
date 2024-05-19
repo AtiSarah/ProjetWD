@@ -1,9 +1,9 @@
 <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) ||(!isset($_SESSION['profile0']) && isset($_SESSION['admin']) ) ) {
     session_destroy();
-    header("Location: ../error.php");
+    header("Location: ../../error.php");
     exit();
 }
 
