@@ -1,10 +1,9 @@
 <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
-    session_destroy();
-    header("Location: ../error.php");
-    exit();
+if (!isset($_SESSION['profile0'])) {
+  header("Location: ../error.php");
+  exit();
 }$id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
 $sql->bind_param("i", $id);
