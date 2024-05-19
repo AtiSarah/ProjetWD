@@ -154,7 +154,7 @@ if(isset($_POST['selected_vehicle'])) {
             echo "</table>";
             echo '<a href="setvehicle.php"><button>Return</button></a>';
             echo'  <span class="button-space"></span> <!-- Espace -->';
-            echo '<a href="manager.php"><button>Cancel</button></a>';
+            echo '<a href="account.php"><button>done</button></a>';
             
         } else {
             
@@ -187,8 +187,8 @@ if(isset($_POST['selected_vehicle'])) {
     echo "Vehicle ID not found in session.";
 }
 ?>
-
 </div>
+
 </section>
     
 <script>
