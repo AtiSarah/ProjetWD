@@ -240,77 +240,46 @@
 }
 
 
-.info-manager {
-  /* Add your styles here */
-  margin-top: 0;
-  padding: 20px;
-
-  border-radius: 10px;
-}
-.info-manager h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-.info-manager label {
-  font-size: 16px;
-  margin-bottom: 5px;
-  display: block;
-}
-
-/* CSS pour set-driver */
-.set-driver {
+.Dashboard-driver {
   margin-top: 0;
   padding: 20px;
   border-radius: 10px;
 }
 
-.set-driver h3 {
-  font-size: 18px;
+.Dashboard-driver h1 {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
-.set-driver label {
-  font-size: 16px;
-  margin-bottom: 5px;
-  display: block;
-}
-
-.set-driver button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.set-driver button:hover {
-  background-color: #45a049;
-}
-
-/* Style pour le tableau */
-.set-driver table {
+.Dashboard-driver table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.set-driver th, .set-driver td {
+.Dashboard-driver th,
+.Dashboard-driver td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
   background-color: #f9f9f9;
 }
 
-.set-driver th {
+.Dashboard-driver th {
   background-color: #f2f2f2;
 }
-.button-space {
-  display: inline-block;
-  width: 10px; /* Ajustez la largeur de l'espace selon vos besoins */
+
+.Dashboard-driver button {
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Rembourrage (haut et bas, gauche et droite) */
+  font-size: 16px; /* Taille de la police */
+  border: none; /* Supprime la bordure */
+  border-radius: 5px; /* Ajoute des coins arrondis */
+  cursor: pointer; /* Change le curseur en main */
+  margin-top: 10px; /* Marge en haut */
 }
+
 
 
 @media (max-width: 400px) {
