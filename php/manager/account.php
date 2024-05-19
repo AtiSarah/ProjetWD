@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['admin']) || !isset($_SESSION['profile0'])) {
+if (!isset($_SESSION['user_id']) || (!isset($_SESSION['admin']) && !isset($_SESSION['profile0']))) {
     session_destroy();
     header("Location: ../error.php");
     exit();
