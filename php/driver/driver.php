@@ -27,6 +27,7 @@ $mission_sql = $link->prepare("SELECT * FROM mission WHERE id_driver = ?");
 $mission_sql->bind_param("i", $id_driver);
 $mission_sql->execute();
 $mission_result = $mission_sql->get_result();
+$_SESSION["id_mission"] = $mission_result['id_mission'];
 ?>
 
 
@@ -102,7 +103,7 @@ $mission_result = $mission_sql->get_result();
       <span class="text"></span>
     </div>
 <!-- Dashboard driver-->
- <div class="Dashboard-driver">
+ <div id="Dashboard-driver">
         <table border="1"> 
             <thead>
                 <tr>

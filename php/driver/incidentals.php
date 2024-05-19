@@ -7,6 +7,9 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../error.php");
     exit();
 }
+if (!isset($_SESSION['id_mission'])) {
+  header("Location: mission.php");
+}
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
 $sql->bind_param("i", $id);
