@@ -14,38 +14,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     
     if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['pass'])) {
-            // Authentification réussie, démarrer la session
-            $_SESSION['user_id'] = $row['id'];
-            $email = strtolower($email);
-            
-            if ($email == "admin@gmail.com") {
-                $_SESSION['admin'] = 1;
-                header("Location: admin/admin.php");
-                exit();
-            }
-                if ($row['profile'] == 0) {
-                    $_SESSION['profile0'] = $row['profile'];
-                    // Redirection vers l'interface manager
-                    header("Location: manager/account.php");
-                    exit();
-                } elseif ($row['profile'] == 1) {
-                    $_SESSION['profile1'] = $row['profile'];
-                    // Redirection vers l'interface driver
-                    header("Location: driver/driver.php");
-                    exit();
-                }
-            }
-        } else {
-            // Mot de passe incorrect
-            echo "Mot de passe incorrect.";
-        }
-    } else {
-        // Aucun utilisateur trouvé avec cet email
-        echo "Aucun utilisateur trouvé avec cet email.";
-    }
-
+      $row = $result->fetch_assoc();
+      // Verify the password
+      if (password_verify($password, $row['pass'])) {
+          // Authentication successful, start the session
+          $_SESSION['user_id'] = $row['id'];
+          $email = strtolower($email);
+          
+          // Check if the user is an admin
+          if ($email == "admin@gmail.com") {
+              $_SESSION['admin'] = 1;
+              header("Location: admin/admin.php");
+              exit();
+          }
+          
+          // Check user profile and redirect accordingly
+          if ($row['profile'] == 0) {
+              $_SESSION['profile0'] = $row['profile'];
+              // Redirect to manager interface
+              header("Location: manager/account.php");
+              exit();
+          } elseif ($row['profile'] == 1) {
+              $_SESSION['profile1'] = $row['profile'];
+              // Redirect to driver interface
+              header("Location: driver/driver.php");
+              exit();
+          }
+      } else {
+          // Incorrect password
+          echo "Incorrect password.";
+      }
+  } else {
+      // No user found with this email
+      echo "No user found with this email.";
+  }
+}
 ?>
 
 <!DOCTYPE html>

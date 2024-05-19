@@ -2,7 +2,8 @@
 <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['admin']) ) {
+  
     session_destroy();
     header("Location: ../error.php");
     exit();
