@@ -312,6 +312,7 @@
   width: 10px; /* Ajustez la largeur de l'espace selon vos besoins */
 }
 
+
 @media (max-width: 400px) {
   .sidebar.close .nav-links li .sub-menu{
     display: none;

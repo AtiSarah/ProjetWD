@@ -151,7 +151,7 @@ $row = $result->fetch_assoc();
         <input type="text" id="arrival_city" name="arrival_city" required><br><br>
         <label for="departure_date">Departure Date:</label><br>
         <input type="date" id="departure_date" name="departure_date" required><br><br>
-        <label for="duration">Duration (min):</label><br>
+        <label for="duration">Duration (hour):</label><br>
         <input type="number" id="duration" name="duration" required><br><br>
         <label for="cost">Cost:</label><br>
         <input type="number" id="cost" name="cost" required><br><br>
