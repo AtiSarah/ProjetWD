@@ -103,13 +103,11 @@
  <?php
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
-    session_destroy();
+if ( !isset($_SESSION['admin']) ) {
     header("Location: ../../error.php");
     exit();
 }
 $id = $_SESSION['user_id'];
-include("../dbp.php");
 echo "<h1>Update Manager:</h1>";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update'])) {

@@ -7,6 +7,7 @@ if (!isset($_SESSION['admin']) ) {
     header("Location: ../error.php");
     exit();
 }
+
 ?>
 
 

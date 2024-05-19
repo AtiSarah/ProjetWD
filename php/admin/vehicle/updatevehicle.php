@@ -103,12 +103,10 @@
     <?php
     session_start();
     include("../dbp.php"); 
-    if (!isset($_SESSION['user_id'])) {
-        session_destroy();
+    if ( !isset($_SESSION['admin']) ) {
         header("Location: ../../error.php");
         exit();
     }
-   
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         $id_vehicle = $_POST['id_vehicle'];

@@ -104,10 +104,9 @@
 echo  "<h1>Update User:</h1>";
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['user_id'])) {
-session_destroy();
-header("Location: ../../error.php");
-exit();
+if ( !isset($_SESSION['admin']) ) {
+    header("Location: ../../error.php");
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
