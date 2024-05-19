@@ -3,7 +3,6 @@
 session_start();
 include("../dbp.php"); 
 if (!isset($_SESSION['profile1'])) {
-  session_destroy();
   header("Location: ../error.php");
   exit();
 }
