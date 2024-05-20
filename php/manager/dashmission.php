@@ -111,6 +111,7 @@ $row = $result->fetch_assoc();
           <th>Cost</th>
           <th>Type</th>
           <th>Finish</th>
+          <th>Action</th>
           </tr>";
 
           // Output data of each row
@@ -126,6 +127,12 @@ $row = $result->fetch_assoc();
               echo "<td>" . htmlspecialchars($row['cost']) . "</td>";
               echo "<td>" . htmlspecialchars($row['type']) . "</td>";
               echo "<td>" . ($row['finish'] == 0 ? 'False' : 'True') . "</td>";
+              echo "<td>
+                    <form action='incidentals.php' method='POST'>
+                        <input type='hidden' name='mission_id' value='" . $row['id_mission'] . "'>
+                        <button type='submit' class='view-button'>View Incidentals</button>
+                    </form>
+                  </td>";
               echo "</tr>";
           }
 

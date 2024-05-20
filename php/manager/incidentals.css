@@ -256,44 +256,35 @@
   margin-bottom: 5px;
   display: block;
 }
-.dash-mission {
+.incidentals {
     margin-top: 0;
     padding: 20px;
     border-radius: 10px;
   }
   
-  .dash-mission h1 {
+  .incidentals h1 {
     font-size: 28px;
     margin-bottom: 10px;
   }
   
-  .dash-mission table {
+  .incidentals table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
   
-  .dash-mission th,
-  .dash-mission td {
+  .incidentals th,
+  .incidentals td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
     background-color: #f9f9f9;
   }
   
-  .dash-mission th {
+  .incidentals th {
     background-color: #f2f2f2;
   }
-  .view-button{
-    background-color: #4CAF50; /* Couleur de fond */
-  color: white; /* Couleur du texte */
-  padding: 10px 20px; /* Rembourrage (haut et bas, gauche et droite) */
-  font-size: 16px; /* Taille de la police */
-  border: none; /* Supprime la bordure */
-  border-radius: 5px; /* Ajoute des coins arrondis */
-  cursor: pointer; /* Change le curseur en main */
-  margin-top: 10px; /* Marge en haut */
-  }
+ 
 
 
 @media (max-width: 400px) {
