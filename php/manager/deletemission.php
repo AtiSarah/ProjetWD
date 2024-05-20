@@ -126,7 +126,7 @@ $row = $result->fetch_assoc();
                 echo "<td>" . ($row["finish"] == 0 ? 'false' : 'true') . "</td>";
                 echo "<td><form method='post' action=''>
                 <input type='hidden' name='id' value='" . $row["id_mission"] . "'>
-                <input type='submit' name='delete' class='delete-mission-btn' value='Delete'>
+                <input type='submit' name='delete' class='delete-mission-btn' value='Delete' onclick='return confirmDelete()'>
                 </form></td>";
 
                 echo "</tr>";
@@ -170,6 +170,10 @@ $row = $result->fetch_assoc();
     </div>
 </section>
 <script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this mission?");
+    }
+
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".bx-menu");
     console.log(sidebarBtn);
