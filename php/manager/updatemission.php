@@ -121,7 +121,7 @@ $row = $result->fetch_assoc();
       $sql = "SELECT * FROM mission";
       $result = $link->query($sql);
 
-      if ($result && $result->num_rows > 0) { 
+      if ($result && $result->num_rows > 0) {  
           echo "<table border='1'>";
           echo "<tr>
                   <th>ID</th>
