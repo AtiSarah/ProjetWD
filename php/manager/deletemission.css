@@ -16,6 +16,9 @@
   z-index: 100;
   transition: all 0.5s ease;
 }
+body{
+background:#E4E9F7;
+}
 .sidebar.close{
   width: 78px;
 }

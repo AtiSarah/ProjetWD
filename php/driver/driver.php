@@ -109,7 +109,7 @@ $mission_result = $mission_sql->get_result();
                     <th>Departure_City</th>
                     <th>Arrival_City</th>
                     <th>Departure_Date</th>
-                    <th>Duration (Deadline)</th>
+                    <th>Arrival_Date</th>
                     <th>Cost</th>
                     <th>Type</th>
                     <th>Vehicle</th>
@@ -121,7 +121,7 @@ $mission_result = $mission_sql->get_result();
                     <td><?php echo htmlspecialchars($mission_row['departure_city']); ?></td>
                     <td><?php echo htmlspecialchars($mission_row['arrival_city']); ?></td>
                     <td><?php echo htmlspecialchars($mission_row['departure_date']); ?></td>
-                    <td><?php echo htmlspecialchars($mission_row['duration']); ?></td>
+                    <td><?php echo htmlspecialchars($mission_row['arrival_date']); ?></td>
                     <td><?php echo htmlspecialchars($mission_row['cost']); ?></td>
                     <td><?php echo htmlspecialchars($mission_row['type']); ?></td>
                     <!-- You need to fetch and display the vehicle details for this mission -->

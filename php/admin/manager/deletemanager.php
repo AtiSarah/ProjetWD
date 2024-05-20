@@ -11,17 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
 
     // Check if the user confirms the deletion
     if (isset($_POST['confirm_delete'])) {
-        // Check if there are related records in the mission table
-        $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
-        $checkMissionSql->bind_param("i", $id);
-        $checkMissionSql->execute();
-        $checkMissionResult = $checkMissionSql->get_result();
-
-        if ($checkMissionResult->num_rows > 0) {
-            // Display error message or handle related records deletion
-            echo "Cannot delete manager. Related mission records exist.";
-        } else {
-            // No related records found, proceed with manager deletion
+    
             $deleteManagerSql = $link->prepare("DELETE FROM manager WHERE id = ?");
             $deleteManagerSql->bind_param("i", $id);
             $deleteManagerSql->execute();
@@ -29,21 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             
             // Delete the associated user
             $deleteUserSql = $link->prepare("DELETE FROM user WHERE id =?");
-            
             $deleteUserSql->bind_param("i", $id);
             $deleteUserSql->execute();
             $deleteUserSql->close();
 
-            echo "Manager and associated user deleted successfully.";
         }
 
         // Close prepared statements and database connection
-        $checkMissionSql->close();
-        mysqli_close($link);
-    } else {
+       
+    else {
         echo "Deletion cancelled.";
     }
-}
+  
+  }
 ?>
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->

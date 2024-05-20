@@ -8,53 +8,47 @@ if (!isset($_SESSION['profile0'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {
-if (!empty($_POST['departure_city']) && !empty($_POST['arrival_city']) && !empty($_POST['departure_date']) && !empty($_POST['duration']) && !empty($_POST['cost']) && !empty($_POST['type'])) {
-  
-        $departureCity = $_POST['departure_city'];
-        $arrivalCity = $_POST['arrival_city'];
-        $departureDate = $_POST['departure_date'];
-        $duration = $_POST['duration'];
-        $cost = $_POST['cost'];
-        $type = $_POST['type'];
-        
-        // Check if departure date is greater than the current date
-        if (strtotime($departureDate) >= time()) {
-            // Set session variables and redirect
-            $_SESSION['mission_added'] = true;
-            $_SESSION['departure_city'] = $departureCity;
-            $_SESSION['departure_date'] = $departureDate;
-            $_SESSION['arrival_city'] = $arrivalCity;
-            $_SESSION['duration'] = $duration;
-            $_SESSION['cost'] = $cost;
-            $_SESSION['type'] = $type;
-            header("Location: setvehicle.php");
-            exit();
-        } else {
-
-
-          echo '<script>
-          window.onload = function() {
-              alert("Departure date should be greater than the current date!");
-          }
-        </script>';
-        }
-           }
-        
+        if (!empty($_POST['departure_city']) && !empty($_POST['arrival_city']) && !empty($_POST['departure_date']) && !empty($_POST['arrival_date']) && !empty($_POST['cost']) && !empty($_POST['type'])) {
             
-        
-     else {
+            $departureCity = $_POST['departure_city'];
+            $arrivalCity = $_POST['arrival_city'];
+            $departureDate = $_POST['departure_date'];
+            $arrivalDate = $_POST['arrival_date'];
+            $cost = $_POST['cost'];
+            $type = $_POST['type'];
+            
+            $currentDate = time();
+            $departureDateTime = strtotime($departureDate);
+            $arrivalDateTime = strtotime($arrivalDate);
 
-
-      echo '<script>
-      window.onload = function() {
-          alert("Error adding mission. Please try again!");
-      }
-    </script>';
+            if ($departureDateTime >= $currentDate && $departureDateTime < $arrivalDateTime) {
+                // Set session variables and redirect
+                $_SESSION['mission_added'] = true;
+                $_SESSION['departure_city'] = $departureCity;
+                $_SESSION['departure_date'] = $departureDate;
+                $_SESSION['arrival_city'] = $arrivalCity;
+                $_SESSION['arrival_date'] = $arrivalDate;
+                $_SESSION['cost'] = $cost;
+                $_SESSION['type'] = $type;
+                header("Location: setvehicle.php");
+                exit();
+            } else {
+                $errorMessage = $departureDateTime < $currentDate ? "Departure date should be greater than the current date!" : "Departure date should be earlier than the arrival date!";
+                echo '<script>
+                window.onload = function() {
+                    alert("'.$errorMessage.'");
+                }
+                </script>';
+            }
+        } else {
+            echo '<script>
+            window.onload = function() {
+                alert("Error adding mission. Please try again!");
+            }
+            </script>';
+        }
     }
-                  
-    }}
-
-
+}
 
 //home page info
 $id = $_SESSION['user_id'];
@@ -64,6 +58,9 @@ $sql->execute();
 $result = $sql->get_result();
 $row = $result->fetch_assoc();
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -150,8 +147,8 @@ $row = $result->fetch_assoc();
         <input type="text" id="arrival_city" name="arrival_city" required><br><br>
         <label for="departure_date">Departure Date:</label><br>
         <input type="date" id="departure_date" name="departure_date" required><br><br>
-        <label for="duration">Duration (hour):</label><br>
-        <input type="number" id="duration" name="duration" required><br><br>
+        <label for="arrival_date">Arrival Date:</label><br>
+        <input type="date" id="arrival_date" name="arrival_date" required><br><br>
         <label for="cost">Cost:</label><br>
         <input type="number" id="cost" name="cost" required><br><br>
         <label for="state">Type:</label><br>

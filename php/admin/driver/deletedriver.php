@@ -1,26 +1,36 @@
 <?php
 session_start();
 include("../dbp.php"); 
+
+$message = ""; // Initialize a message variable
+
 if ( !isset($_SESSION['admin']) ) {
     header("Location: ../../error.php");
     exit();
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $id = $_POST['id'];
+    $selectDriverSql = $link->prepare("SELECT id_driver FROM driver WHERE id = ?");
+    $selectDriverSql->bind_param("i", $id);
+    $selectDriverSql->execute();
+    $result = $selectDriverSql->get_result(); 
+    $row = $result->fetch_assoc();
+    $selectDriverSql->close();
+    $id_driver = $row["id_driver"];
+   
 
     // Check if the user confirms the deletion
     if (isset($_POST['confirm_delete'])) {
         // Check if there are related records in the mission table
         $checkMissionSql = $link->prepare("SELECT id_mission FROM mission WHERE id_driver = ?");
-        $checkMissionSql->bind_param("i", $id);
+        $checkMissionSql->bind_param("i", $id_driver);
         $checkMissionSql->execute();
         $checkMissionResult = $checkMissionSql->get_result();
 
         if ($checkMissionResult->num_rows > 0) {
             // Display error message or handle related records deletion
-            echo "Cannot delete driver. Related mission records exist.";
+            $message = "Cannot delete driver. Related mission records exist.";
         } else {
             // No related records found, proceed with driver deletion
             $deleteDriverSql = $link->prepare("DELETE FROM driver WHERE id = ?");
@@ -34,14 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             $deleteUserSql->execute();
             $deleteUserSql->close();
 
-            echo "Driver and associated user deleted successfully.";
+            $message = "Driver and associated user deleted successfully.";
         }
 
         // Close prepared statements and database connection
         $checkMissionSql->close();
         mysqli_close($link);
     } else {
-        echo "Deletion cancelled.";
+        $message = "Deletion cancelled.";
     }
 }
 ?>
@@ -145,60 +155,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
       <i class='bx bx-menu' ></i>
       <span class="text"></span>
     </div>
-<!--DASH-DRIVER-->
- <div class="delete-driver">
-    <h1>Delete Driver:</h1>
-    <?php
-    // Include the database connection file
-    include("../dbp.php");
+    <!--DASH-DRIVER-->
+    <div class="delete-driver">
+        <h1>Delete Driver:</h1>
+        <?php
+        // Include the database connection file
+        include("../dbp.php");
 
-    // Query to select all records from the driver table
-    $sql = "SELECT * FROM driver";
-    $result = $link->query($sql);
+        // Query to select all records from the driver table
+        $sql = "SELECT * FROM driver";
+        $result = $link->query($sql);
 
-    // Check if there are any records returned
-    if ($result && $result->num_rows > 0) {
-        // Display table header
-        
-        echo "<table border='1'>
-        <tr>
-        <th>ID Driver</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Date of Birth</th>
-        <th>Phone</th>
-        <th>Action</th>
-        </tr>";
+        // Check if there are any records returned
+        if ($result && $result->num_rows > 0) {
+            // Display table header
+            
+            echo "<table border='1'>
+            <tr>
+            <th>ID Driver</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Phone</th>
+            <th>Action</th>
+            </tr>";
 
-        // Output data of each row
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["id_driver"] . "</td>";
-            echo "<td>" . $row["firstname"] . "</td>";
-            echo "<td>" . $row["lastname"] . "</td>";
-            echo "<td>" . $row["datenaiss"] . "</td>";
-            echo "<td>" . $row["phone"] . "</td>";
-            echo "<td><form method='post' action='deletedriver.php?id=" . $row["id"] . "' onsubmit='return confirm(\"Are you sure you want to delete this driver?\")'>
-                    <input type='hidden' name='id' value='" . $row["id"] . "'>
-                    <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
-                    <input type='submit' name='delete' value='Delete' class='delete-btn'>
-                </form></td>";
-            echo "</tr>";
+            // Output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["id_driver"] . "</td>";
+                echo "<td>" . $row["firstname"] . "</td>";
+                echo "<td>" . $row["lastname"] . "</td>";
+                echo "<td>" . $row["datenaiss"] . "</td>";
+                echo "<td>" . $row["phone"] . "</td>";
+                echo "<td><form method='post' action='deletedriver.php?id=" . $row["id"] . "' onsubmit='return confirm(\"Are you sure you want to delete this driver?\")'>
+                        <input type='hidden' name='id' value='" . $row["id"] . "'>
+                        <input type='hidden' name='confirm_delete' value='true'> <!-- Added hidden input for confirmation -->
+                        <input type='submit' name='delete' value='Delete' class='delete-btn'>
+                    </form></td>";
+                echo "</tr>";
+            }
+            // Close the table
+            echo "</table>";
+        } else {
+            echo "No records found";
         }
-        // Close the table
-        echo "</table>";
-    } else {
-        echo "No records found";
-    }
 
-    // Close the database connection
-    mysqli_close($link);
+        // Close the database connection
+        mysqli_close($link);
 
-    ?>
-</div>
+        // Display message
+        if ($message) {
+            echo "<p class='message'>$message</p>";
+        }
+        ?>
+    </div>
 </section>
-
- 
 
   <script>
   let arrow = document.querySelectorAll(".arrow");
@@ -217,5 +229,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
   </script>
 </body>
 </html>
-
-

@@ -91,7 +91,7 @@ $row = $result->fetch_assoc();
  <div class="dash-mission">
 <?php
  // Query to select all records from the mission table
-$sql = "SELECT id_mission, id_driver, id_vehicle, departure_city, arrival_city, departure_date, duration, cost, type FROM mission";
+$sql = "SELECT id_mission, id_driver, id_vehicle, departure_city, arrival_city, departure_date, arrival_date, cost, type FROM mission";
 
 // Execute the query
 $result = mysqli_query($link, $sql);
@@ -108,7 +108,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <th>Departure City</th>
     <th>Arrival City</th>
     <th>Departure Date</th>
-    <th>Duration</th>
+    <th>Arrival Date</th>
     <th>Cost</th>
     <th>Type</th>
     </tr>";
@@ -122,7 +122,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "<td>" . $row['departure_city'] . "</td>";
         echo "<td>" . $row['arrival_city'] . "</td>";
         echo "<td>" . $row['departure_date'] . "</td>";
-        echo "<td>" . $row['duration'] . "</td>";
+        echo "<td>" . $row['arrival_date'] . "</td>";
         echo "<td>" . $row['cost'] . "</td>";
         echo "<td>" . $row['type'] . "</td>";
         echo "</tr>";

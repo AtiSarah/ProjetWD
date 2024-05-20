@@ -6,8 +6,6 @@ if ( !isset($_SESSION['admin']) ) {
     exit();
 }
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {
         if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['datenaiss']) && isset($_POST['phone']) && isset($_POST['license'])) {
@@ -42,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "User ID not found. Please insert user data first.";
                 }
             } else {
-                echo "Driver must be 18 years or older.";
+                echo "Driver must be 18 years or older."; 
             }
         } 
     }
@@ -161,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="date" id="datenaiss" name="datenaiss" required><br><br>
         
         <label for="phone">Phone:</label><br>
-        <input type="text" id="phone" name="phone" required><br><br>
+        <input type="number" id="phone" name="phone" required><br><br>
 
         <label for="license">License Type:</label><br>
         <select id="license" name="license" required>

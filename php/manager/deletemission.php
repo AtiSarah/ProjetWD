@@ -101,13 +101,13 @@ $row = $result->fetch_assoc();
             // Display table header
             echo "<table border='1'>
             <tr>
-            <th>ID Mission</th>
-            <th>ID Driver</th>
-            <th>ID Vehicle</th>
-            <th>Departure City</th>
-            <th>Arrival City</th>
-            <th>Departure Date</th>
-            <th>Duration</th>
+            <th>ID&nbsp;Mission</th>
+            <th>ID&nbsp;Driver</th>
+            <th>ID&nbsp;Vehicle</th>
+            <th>Departure&nbsp;City</th>
+            <th>Arrival&nbsp;City</th>
+            <th>Departure&nbsp;Date</th>
+            <th>&nbsp;Arrival&nbsp;Date</th>
             <th>Cost</th>
             <th>Type</th>
             <th>Action</th>
@@ -122,7 +122,7 @@ $row = $result->fetch_assoc();
                 echo "<td>" . $row["departure_city"] . "</td>";
                 echo "<td>" . $row["arrival_city"] . "</td>";
                 echo "<td>" . $row["departure_date"] . "</td>";
-                echo "<td>" . $row["duration"] . "</td>";
+                echo "<td>" . $row["arrival_date"] . "</td>";
                 echo "<td>" . $row["cost"] . "</td>";
                 echo "<td>" . $row["type"] . "</td>";
                 echo "<td><form method='post' action='deletemission.php'  onsubmit='return confirm(\"Are you sure you want to delete this mission?\")'>

@@ -8,25 +8,25 @@
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
 <body>
   <div class="sidebar close">
     <div class="logo-details">
-    <i class="#"></i>
+      <i class="#"></i>
       <span class="logo_name">VROOMCAR</span>
     </div>
     <ul class="nav-links">
-    <li> <!--DASHBOARD -->
+      <li> <!--DASHBOARD -->
         <div class="iocn-link">
           <a href="#">
-          <i class='bx bx-grid-alt' ></i>
+            <i class='bx bx-grid-alt' ></i>
             <span class="link_name">Dashboard</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-        <li><a href="../user/dashuser.php">User</a></li>
+          <li><a href="../user/dashuser.php">User</a></li>
           <li><a href="../driver/dashdriver.php">Driver</a></li>
           <li><a href="../manager/dashmanager.php">Manager</a></li>
           <li><a href="dashvehicle.php">Vehicle</a></li>
@@ -35,65 +35,62 @@
       <li> <!--ADD --> 
         <div class="iocn-link">
           <a href="#">
-          <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus"></i>
             <span class="link_name">ADD</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-        <li><a href="../user/dashuser.php">User</a></li>
+          <li><a href="../user/dashuser.php">User</a></li>
           <li><a href="../driver/driver.php">Driver</a></li>
           <li><a href="../manager/manager.php">Manager</a></li>
           <li><a href="vehicle.php">Vehicle</a></li>
         </ul>
       </li>
-      <li>
-     <li> <!--DELETE -->     
-       <div class="iocn-link">
-         <a href="#">
-         <i class="fa-solid fa-minus"></i>
-           <span class="link_name">DELETE</span>
-         </a>
-         <i class='bx bxs-chevron-down arrow' ></i>
-       </div>
-       <ul class="sub-menu">
-         <li><a href="../driver/deletedriver.php">Driver</a></li>
-         <li><a href="../manager/deletemanager.php">Manager</a></li>
-         <li><a href="deletevehicle.php">Vehicle</a></li>
-       </ul>
-     </li>
-     <li>     
+      <li> <!--DELETE -->     
+        <div class="iocn-link">
+          <a href="#">
+            <i class="fa-solid fa-minus"></i>
+            <span class="link_name">DELETE</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a href="../driver/deletedriver.php">Driver</a></li>
+          <li><a href="../manager/deletemanager.php">Manager</a></li>
+          <li><a href="deletevehicle.php">Vehicle</a></li>
+        </ul>
+      </li>
       <li> <!--EDIT --> 
-       <div class="iocn-link">
-         <a href="#">
-         <i class="fa-regular fa-pen-to-square"></i>
-           <span class="link_name">EDIT</span>
-         </a>
-         <i class='bx bxs-chevron-down arrow' ></i>
-       </div>
-       <ul class="sub-menu">
-       <li><a href="../user/updateuser.php">User</a></li>
-         <li><a href="../driver/updatedriver.php">Driver</a></li>
-         <li><a href="../manager/updatemanager.php">Manager</a></li>
-         <li><a href="../vehicle/updatevehicle.php">Vehicle</a></li>
-       </ul>
-     </li>
-     <li>
-
-    <div class="profile-details">
-      <div class="profile-content">
-      <img src="../../../html/img/admin.PNG" alt="profileImg">
-      </div>
-      <div class="name-job">
-      <h3 id="name"></h3>
-        <div class="profile_name">ADMIN</div>
-      </div>
-<a href="../../disconnect.php" class="logout-link">
-    <i class='bx bx-log-out'></i>
-</a>
-    </div>
-  </li>
-</ul>
+        <div class="iocn-link">
+          <a href="#">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span class="link_name">EDIT</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a href="../user/updateuser.php">User</a></li>
+          <li><a href="../driver/updatedriver.php">Driver</a></li>
+          <li><a href="../manager/updatemanager.php">Manager</a></li>
+          <li><a href="../vehicle/updatevehicle.php">Vehicle</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="profile-details">
+          <div class="profile-content">
+            <img src="../../../html/img/admin.PNG" alt="profileImg">
+          </div>
+          <div class="name-job">
+            <h3 id="name"></h3>
+            <div class="profile_name">ADMIN</div>
+          </div>
+          <a href="../../disconnect.php" class="logout-link">
+            <i class='bx bx-log-out'></i>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
   <section class="home-section">
     <div class="home-content">
@@ -101,85 +98,80 @@
       <span class="text"></span>
     </div>
     
-<!--DELETE VEHICLE-->
- <div class="delete-vehicle">
- <?php
-session_start();
-include("../dbp.php"); 
-if ( !isset($_SESSION['admin']) ) {
-    header("Location: ../../error.php");
-    exit();
-}
+    <!--DELETE VEHICLE-->
+    <div class="delete-vehicle">
+      <?php
+      session_start();
+      include("../dbp.php"); 
+      if (!isset($_SESSION['admin'])) {
+          session_destroy();
+          header("Location: ../../error.php");
+          exit();
+      }
 
+      if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
+          $id = $_POST['id'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
-    $id = $_POST['id'];
+          // Delete vehicle
+          $deleteSql = $link->prepare("DELETE FROM vehicle WHERE id_vehicle = ?");
+          $deleteSql->bind_param("i", $id);
+          if ($deleteSql->execute()) {
+              // Redirect to the same page to refresh the table
+              header("Location: deletevehicle.php");
+              exit();
+          } else {
+              // Handle foreign key constraint error
+              echo "Cannot delete vehicle. It is associated with existing missions.";
+          }
+          $deleteSql->close();
+      }
 
-    try {
-        // Delete vehicle
-        $deleteSql = $link->prepare("DELETE FROM vehicle WHERE id_vehicle = ?");
-        $deleteSql->bind_param("i", $id);
-        $deleteSql->execute();
-        $deleteSql->close();
+      echo "<h1>Delete vehicle:</h1>";
 
-        // Redirect to the same page to refresh the table
-        header("Location: deletevehicle.php");
-        exit();
-    } catch (mysqli_sql_exception $e) {
-        // Handle foreign key constraint error
-        echo "Cannot delete vehicle. It is associated with existing missions.";
-    }
-}
-echo "<h1>Delete vehicle:</h1>";
+      // Query to select all records from the vehicle table
+      $sql = "SELECT * FROM vehicle";
+      $result = $link->query($sql);
 
-// Query to select all records from the vehicle table
-$sql = "SELECT * FROM vehicle";
-$result = $link->query($sql);
+      // Check if there are any records returned
+      if ($result && $result->num_rows > 0) {
+          // Table header
+          echo "<table border='1'>
+          <tr>
+          <th>ID</th>
+          <th>Immatriculation</th>
+          <th>Type</th>
+          <th>Brand</th>
+          <th>State</th>
+          <th>License Type</th>
+          <th>Action</th>
+          </tr>";
 
-// Check if there are any records returned
-if ($result && $result->num_rows > 0) {
-    // Table header
-    echo "<table border='1'>
-    <tr>
-    <th>ID</th>
-    <th>Immatriculation</th>
-    <th>Type</th>
-    <th>Brand</th>
-    <th>State</th>
-    <th>License Type</th>
-    <th>Action</th>
-    </tr>";
+          // Output data of each row
+          while ($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              echo "<td>" . htmlspecialchars($row["id_vehicle"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["immatriculation"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["type"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["brand"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["state"]) . "</td>";
+              echo "<td>" . htmlspecialchars($row["license_type"]) . "</td>";
+              echo "<td><form method='post' onsubmit='return confirm(\"Are you sure you want to delete this vehicle?\")' action='deletevehicle.php'>
+                      <input type='hidden' name='id' value='" . $row["id_vehicle"] . "'>
+                      <input type='submit' name='delete' value='Delete' class='delete-btn'>
+                  </form></td>";
+              echo "</tr>";
+          }
 
-    // Output data of each row
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . htmlspecialchars($row["id_vehicle"]) . "</td>";
-        echo "<td>" . htmlspecialchars($row["immatriculation"]) . "</td>";
-        echo "<td>" . htmlspecialchars($row["type"]) . "</td>";
-        echo "<td>" . htmlspecialchars($row["brand"]) . "</td>";
-        echo "<td>" . htmlspecialchars($row["state"]) . "</td>";
-        echo "<td>" . htmlspecialchars($row["license_type"]) . "</td>";
-        echo "<td><form method='post' onsubmit='return confirm(\"Are you sure you want to delete this vehicle?\")' action='deletevehicle.php'>
-                <input type='hidden' name='id' value='" . $row["id_vehicle"] . "'>
-                <input type='submit' name='delete' value='Delete' class='delete-btn'>
-            </form></td>";
-        echo "</tr>";
-    }
+          echo "</table>";
+      } else {
+          echo "No records found";
+      }
 
-    echo "</table>";
-} else {
-    echo "No records found";
-}
+      mysqli_close($link);
+      ?>
+    </div>
+  </section>
 
-mysqli_close($link);
-
-
-
-?>
-
-
-</div>
- </section>
 
   <script>
   let arrow = document.querySelectorAll(".arrow");

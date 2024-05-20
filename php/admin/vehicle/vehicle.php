@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql->bind_param("issss", $immatriculation, $type, $brand, $state, $license_type);
             $sql->execute();
             $sql->close();
-            
+            header("Location: dashvehicle.php");
         } else {
             echo "Tous les champs doivent être remplis.";
         }

@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lastname = $_POST['lastname'];
             $datenaiss = $_POST['datenaiss'];
             $phone = $_POST['phone'];
+          
+
 
             // Calculate the age of the manager
             $manager_age = date_diff(date_create($datenaiss), date_create('today'))->y;
@@ -162,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="date" id="datenaiss" name="datenaiss" required><br><br>
         
         <label for="phone">Phone:</label><br>
-        <input type="text" id="phone" name="phone" required><br><br>
+        <input type="number" id="phone" name="phone" required><br><br>
        
         <input type="submit" name="submit" value="CREATE">
     </form>

@@ -94,22 +94,33 @@ $row = $result->fetch_assoc();
     <?php
     echo"<h1>Update Mission:</h1>";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-        $id_mission = $_POST['id_mission'];
-        $departure_city = $_POST['departure_city'];
-        $arrival_city = $_POST['arrival_city'];
-        $departure_date = $_POST['departure_date'];
-        $duration = $_POST['duration'];
-        $cost = $_POST['cost'];
-        $type = $_POST['type'];
-
-        // Update the mission details in the database
-        $updateSql = $link->prepare("UPDATE mission SET departure_city=?, arrival_city=?, departure_date=?, duration=?, cost=?, type=? WHERE id_mission=?");
-        $updateSql->bind_param("sssiisi", $departure_city, $arrival_city, $departure_date, $duration, $cost, $type, $id_mission);
-        $updateSql->execute();
-        $updateSql->close();
-
-        echo "Mission updated successfully.";
-    }
+      $id_mission = $_POST['id_mission'];
+      $departure_city = $_POST['departure_city'];
+      $arrival_city = $_POST['arrival_city'];
+      $departure_date = $_POST['departure_date'];
+      $arrival_date = $_POST['arrival_date'];
+      $cost = $_POST['cost'];
+      $type = $_POST['type'];
+  
+      $current_date = time();
+  
+      $departure_timestamp = strtotime($departure_date);
+      $arrival_timestamp = strtotime($arrival_date);
+  
+      if ($departure_timestamp <= $current_date) {
+          echo "Invalid departure date. Departure date must be in the future.";
+      } elseif ($arrival_timestamp <= $departure_timestamp) {
+          echo "Invalid arrival date. Arrival date must be after the departure date.";
+      } else {
+          // Update the mission details in the database
+          $updateSql = $link->prepare("UPDATE mission SET departure_city=?, arrival_city=?, departure_date=?, arrival_date=?, cost=?, type=? WHERE id_mission=?");
+          $updateSql->bind_param("ssssisi", $departure_city, $arrival_city, $departure_date, $arrival_date, $cost, $type, $id_mission);
+          $updateSql->execute();
+          $updateSql->close();
+  
+          echo "Mission updated successfully.";
+      }
+  }
 
     // Fetch all missions from the database
     $sql = "SELECT * FROM mission";
@@ -119,10 +130,10 @@ $row = $result->fetch_assoc();
         echo "<table border='1'>";
         echo "<tr>
                 <th>ID</th>
-                <th>Departure City</th>
-                <th>Arrival City</th>
-                <th>Departure Date</th>
-                <th>Duration</th>
+                <th>Departure&nbsp;City</th>
+                <th>Arrival&nbsp;City</th>
+                <th>Departure&nbsp;Date</th>
+                <th>Arrival&nbsp;Date</th>
                 <th>Cost</th>
                 <th>Type</th>
                 <th>Action</th>
@@ -134,7 +145,7 @@ $row = $result->fetch_assoc();
             echo "<td>" . $row['departure_city'] . "</td>";
             echo "<td>" . $row['arrival_city'] . "</td>";
             echo "<td>" . $row['departure_date'] . "</td>";
-            echo "<td>" . $row['duration'] . "</td>";
+            echo "<td>" . $row['arrival_date'] . "</td>";
             echo "<td>" . $row['cost'] . "</td>";
             echo "<td>" . $row['type'] . "</td>";
             echo "<td>
@@ -143,7 +154,7 @@ $row = $result->fetch_assoc();
                         <input type='text' name='departure_city' value='" . $row['departure_city'] . "'>
                         <input type='text' name='arrival_city' value='" . $row['arrival_city'] . "'>
                         <input type='date' name='departure_date' value='" . $row['departure_date'] . "'>
-                        <input type='number' name='duration' value='" . $row['duration'] . "'>
+                        <input type='date' name='arrival_date' value='" . $row['arrival_date'] . "'>
                         <input type='number' name='cost' value='" . $row['cost'] . "'>
                         <input type='text' name='type' value='" . $row['type'] . "'>
                         <input type='submit' name='update' value='Update'>

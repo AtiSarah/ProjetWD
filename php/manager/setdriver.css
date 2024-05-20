@@ -240,36 +240,36 @@
 }
 
 
-.Dashboard-driver {
+.set-driver {
   margin-top: 0;
   padding: 20px;
   border-radius: 10px;
 }
 
-.Dashboard-driver h1 {
+.set-driver h1 {
   font-size: 28px;
   margin-bottom: 10px;
 }
 
-.Dashboard-driver table {
+.set-driver table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.Dashboard-driver th,
-.Dashboard-driver td {
+.set-driver th,
+.set-driver td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
   background-color: #f9f9f9;
 }
 
-.Dashboard-driver th {
+.set-driver th {
   background-color: #f2f2f2;
 }
 
-.Dashboard-driver button {
+.set-driver button {
   background-color: #4CAF50; /* Couleur de fond */
   color: white; /* Couleur du texte */
   padding: 10px 20px; /* Rembourrage (haut et bas, gauche et droite) */

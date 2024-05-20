@@ -1,9 +1,11 @@
 <?php
+ob_start();
 session_start();
 include("../dbp.php"); 
-if (!isset($_SESSION['profile0'])) {
-  header("Location: ../error.php");
-  exit();
+if (!isset($_SESSION['user_id'])) {
+    session_destroy();
+    header("Location: ../error.php");
+    exit();
 }
 //home page affichage
 $id = $_SESSION['user_id'];
@@ -96,7 +98,7 @@ if(isset($_POST['selected_vehicle'])) {
     $departureCity = $_SESSION['departure_city'];
     $arrivalCity = $_SESSION['arrival_city'];
     $departureDate = $_SESSION['departure_date'];
-    $duration = $_SESSION['duration'];
+    $arrival_date = $_SESSION['arrival_date'];
     $cost = $_SESSION['cost'];
     $type = $_SESSION['type'];
 
@@ -153,7 +155,7 @@ if(isset($_POST['selected_vehicle'])) {
             echo "</table>";
             echo '<a href="setvehicle.php"><button>Return</button></a>';
             echo'  <span class="button-space"></span> <!-- Espace -->';
-            echo '<a href="account.php"><button>done</button></a>';
+           
             
         } else {
             
@@ -173,10 +175,15 @@ if(isset($_POST['selected_vehicle'])) {
         $id_driver = $_POST['selected_driver'];
 
         // Insérer les données de la mission dans la base de données
-        $sql = "INSERT INTO mission (id_driver, id_vehicle, departure_city, arrival_city, departure_date, duration, cost, type) 
-                VALUES ('$id_driver', '$id_vehicle', '$departureCity', '$arrivalCity', '$departureDate', '$duration', '$cost', '$type')";
+        $sql = "INSERT INTO mission (id_driver, id_vehicle, departure_city, arrival_city, departure_date, arrival_date, cost, type) 
+                VALUES ('$id_driver', '$id_vehicle', '$departureCity', '$arrivalCity', '$departureDate', '$arrival_date', '$cost', '$type')";
 
-        if (!$link->query($sql) === TRUE) {
+        if ($link->query($sql) === TRUE) {
+          header("Location: dashmission.php");
+          ob_end_flush();
+          exit();
+        }
+        else {
           echo "Error: " . $sql . "<br>" . $link->error;
         }
             
