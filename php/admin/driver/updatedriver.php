@@ -107,7 +107,7 @@ if ( !isset($_SESSION['admin']) ) {
     exit();
 }
 
-echo "<h1>Update Driver:</h1>";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update'])) {
         $id_driver = $_POST['id_driver'];
@@ -129,13 +129,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $updateSql->bind_param("sssssi", $firstname, $lastname, $datenaiss, $phone, $license_type, $id_driver);
             $updateSql->execute();
             $updateSql->close();
-            echo "Driver updated successfully.";
         } else {
             echo "Driver must be 18 years or older.";
         }
     }
 }
-
+echo "<h1>Update Driver:</h1>";
 // Fetch all drivers from the database
 $sql = "SELECT * FROM driver";
 $result = $link->query($sql);
@@ -168,14 +167,13 @@ if ($result && $result->num_rows > 0) {
                     <input type='date' name='datenaiss' value='" . $row['datenaiss'] . "'>
                     <input type='text' placeholder='phone' name='phone' value='" . $row['phone'] . "'>
                     <input type='text' placeholder='license type' name='license_type' value='" . $row['license_type'] . "'>
-                    <input type='submit' name='update' value='Update' >
+                    <input type='submit' name='update' value='Update' onclick='return confirmUpdate(" . $row['id_driver'] . ")'>
                 </form>
             </td>";
         echo "</tr>";
     }
 
     echo "</table>";
-    
 } else {
     echo "No drivers found.";
 }
@@ -188,7 +186,15 @@ mysqli_close($link);
     <input type="hidden" id="confirmAction" name="confirmAction">
 </form>
 
-
+<script>
+    function confirmUpdate(id_driver) {
+        if (confirm("Are you sure you want to update this driver?")) {
+            document.getElementById("id_driver").value = id_driver;
+            document.getElementById("confirmAction").value = "update";
+            document.getElementById("confirmForm").submit();
+        }
+    }
+</script>
 </div>
 </section>
 
