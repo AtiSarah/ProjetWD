@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Check if the manager is at least 19 years old
             if ($manager_age < 19) {
                 // Display a message that the manager must be at least 19 years old
-                echo "This manager must be at least 19 years old.";
+                echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This manager must be at least 19 years old.";
             } else {
                 // Check if user ID is available in session
                 if (isset($_SESSION['user_id'])) {
