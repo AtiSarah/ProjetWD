@@ -22,6 +22,16 @@
    header("Location: driver.php");
    exit();
  }
+
+ // Handle the deletion of incidental
+ if (isset($_POST['delete_incidental'])) {
+   $id_incidental = $_POST['id_incidental'];
+   $delete_sql = $link->prepare("DELETE FROM incidental WHERE id_incidental = ?");
+   $delete_sql->bind_param("i", $id_incidental);
+   $delete_sql->execute();
+   header("Location: incidentals.php"); // Refresh the page to reflect changes
+   exit();
+ }
 ?>
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
@@ -113,6 +123,7 @@
                 <th>ID Mission</th>
                 <th>Type</th>
                 <th>Montant</th>
+                <th>Action</th>
             </tr>";
 
     while ($row_incidentals = $result_incidentals->fetch_assoc()) {
@@ -121,6 +132,13 @@
       echo "<td>" . htmlspecialchars($row_incidentals['id_mission']) . "</td>";
       echo "<td>" . htmlspecialchars($row_incidentals['type']) . "</td>";
       echo "<td>" . htmlspecialchars($row_incidentals['montant']) . "</td>";
+      echo "<td> 
+                    <form action='' method='POST'>
+                        <input type='hidden' name='id_incidental' value='" . $row_incidentals['id_incidental'] . "'>
+                        <button type='submit' name='delete_incidental' class='mission_btn' class='view-button'>Pay</button>
+                    </form>
+                  </td>";
+      
       echo "</tr>";
     }
     echo "</table>";
