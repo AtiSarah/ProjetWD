@@ -1,18 +1,17 @@
-
 <?php
 session_start();
-include("../dbp.php"); 
+include("../dbp.php");
 if (!isset($_SESSION['profile0'])) {
   header("Location: ../error.php");
   exit();
-}$id = $_SESSION['user_id'];
+}
+$id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM manager WHERE id = ?");
 $sql->bind_param("i", $id);
 $sql->execute();
 $result = $sql->get_result();
 $row = $result->fetch_assoc();
 ?>
-
 
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->
@@ -54,7 +53,6 @@ $row = $result->fetch_assoc();
         <li><a href="addmission.php">Add Mission</a></li><!-- ADD MISSION-->
           <li><a href="updatemission.php">Update Mission</a></li><!-- UPDATE INCIDENTALS-->
           <li><a href="deletemission.php">Delete Mission</a></li><!-- DELETE MISSION-->
-          
         </ul>
       </li>
       <li>
@@ -127,7 +125,7 @@ $row = $result->fetch_assoc();
                 echo "<td>" . $row["cost"] . "</td>";
                 echo "<td>" . $row["type"] . "</td>";
                 echo "<td>" . ($row["finish"] == 0 ? 'false' : 'true') . "</td>";
-                echo "<td><form method='post' action='deletemission.php' onsubmit='return confirmDelete(" . $row["finish"] . ")'>
+                echo "<td><form method='post' action='deletemission.php' onsubmit='return confirmDelete(" . $row["finish"] . ", " . $row["id_mission"] . ")'>
                 <input type='hidden' name='id' value='" . $row["id_mission"] . "'>
                 <input type='submit' name='delete' class='delete-mission-btn' value='Delete'>
             </form></td>";
@@ -139,43 +137,64 @@ $row = $result->fetch_assoc();
         } else {
             echo "No missions found ";
         }
+
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
             $id = $_POST['id'];
-    
-            // Delete the mission
-            $deleteSql = $link->prepare("DELETE FROM mission WHERE id_mission = ?");
-            $deleteSql->bind_param("i", $id);
-            $deleteSql->execute();
-    
-            if ($deleteSql->affected_rows > 0) {
-                echo "Mission deleted successfully.";
-            } 
-    
-            // Close prepared statement and database connection
-            $deleteSql->close();
             
-         }    
+            // Check if the mission has incidentals
+            $checkIncidentalsSql = $link->prepare("SELECT COUNT(*) as count FROM incidental WHERE id_mission = ?");
+            $checkIncidentalsSql->bind_param("i", $id);
+            $checkIncidentalsSql->execute();
+            $incidentalsResult = $checkIncidentalsSql->get_result();
+            $incidentalsRow = $incidentalsResult->fetch_assoc();
+            
+            if ($incidentalsRow['count'] > 0) {
+                echo "<script>alert('This mission has incidentals.');</script>";
+            } else {
+                // Delete the mission
+                $deleteSql = $link->prepare("DELETE FROM mission WHERE id_mission = ?");
+                $deleteSql->bind_param("i", $id);
+                $deleteSql->execute();
+
+                if ($deleteSql->affected_rows > 0) {
+                    echo "<script>alert('Mission deleted successfully.'); window.location.href='deletemission.php';</script>";
+                } else {
+                    echo "<script>alert('Failed to delete mission.');</script>";
+                }
+
+                $deleteSql->close();
+            }
+
+            $checkIncidentalsSql->close();
+        }
+
         // Close the database connection
         mysqli_close($link);
- ?>
-
- 
+    ?>
 </div>
   </section>
   <script>
-  function confirmDelete(finish) {
+  function confirmDelete(finish, missionId) {
     if (finish == 0) {
       return confirm("This mission is still in progress. Are you sure you want to delete it?");
     }
+    
+    let hasIncidentals = <?php
+    $incidentalsCheckSql = "SELECT id_mission, COUNT(*) as count FROM incidental GROUP BY id_mission";
+    $incidentalsCheckResult = $link->query($incidentalsCheckSql);
+    $incidentalsArray = [];
+    while ($row = $incidentalsCheckResult->fetch_assoc()) {
+      $incidentalsArray[$row['id_mission']] = $row['count'];
+    }
+    echo json_encode($incidentalsArray);
+    ?>;
+    
+    if (hasIncidentals[missionId] > 0) {
+      alert("This mission has incidentals.");
+      return false;
+    }
+    
     return true;
-  }
-
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
-    });
   }
   let sidebar = document.querySelector(".sidebar");
   let sidebarBtn = document.querySelector(".bx-menu");
@@ -185,55 +204,4 @@ $row = $result->fetch_assoc();
   });
   </script>
 </body>
-
 </html>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
