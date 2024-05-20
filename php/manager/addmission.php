@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $departureDateTime = strtotime($departureDate);
             $arrivalDateTime = strtotime($arrivalDate);
 
-            if ($departureDateTime >= $currentDate && $departureDateTime < $arrivalDateTime) {
+            if ($departureDateTime >= $currentDate && $departureDateTime <= $arrivalDateTime) {
                 // Set session variables and redirect
                 $_SESSION['mission_added'] = true;
                 $_SESSION['departure_city'] = $departureCity;
