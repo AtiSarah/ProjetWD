@@ -12,15 +12,25 @@ if (!isset($_SESSION['profile1'])) {
 if (isset($_POST['selected_mission'])) {
     $selected_mission = $_POST['selected_mission'];
     $_SESSION['selected_mission'] = $selected_mission;
+} elseif (isset($_SESSION['selected_mission'])) {
+    $selected_mission = $_SESSION['selected_mission'];
 } else {
     header("Location: driver.php");
     exit();
 }
 
+// Check if the finish button is clicked and update the mission status
+if (isset($_POST['finish-button']) && isset($_POST['mission_id'])) {
+    $mission_id = $_POST['mission_id'];
+    $update_sql = $link->prepare("UPDATE mission SET finish = 1 WHERE id_mission = ?");
+    $update_sql->bind_param("i", $mission_id);
+    $update_sql->execute();
+}
+
 // Get user information
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
-$sql->bind_param("i", $id);
+$sql->bind_param("i", $id);  // corrected from sql to $sql
 $sql->execute();
 $result = $sql->get_result();
 $row = $result->fetch_assoc();
@@ -178,7 +188,7 @@ $row = $result->fetch_assoc();
             ?>
         </table>
         </div>
-        <form action="process_finish.php" method="post">
+        <form action="incidentals.php" method="post">
             <input type="hidden" name="mission_id" value="<?php echo $selected_mission; ?>"><br>
             <input type="submit" class="finish-button" name="finish-button" value="Finish Mission"><br><br>
         </form>
@@ -192,8 +202,6 @@ $row = $result->fetch_assoc();
             </form>
         </div>
     </div>
-    
-        
 </section>
 <script>
     let arrow = document.querySelectorAll(".arrow");
