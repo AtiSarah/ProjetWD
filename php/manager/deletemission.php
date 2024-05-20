@@ -174,12 +174,22 @@ $row = $result->fetch_assoc();
         return confirm("Are you sure you want to delete this mission?");
     }
 
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("close");
-    });
+    
+     let arrow = document.querySelectorAll(".arrow");
+     for (var i = 0; i < arrow.length; i++) {
+     arrow[i].addEventListener("click", (e)=>{
+     let arrowParent = e.target.parentElement.parentElement;
+     arrowParent.classList.toggle("showMenu");
+     });
+           }
+         
+     let sidebar = document.querySelector(".sidebar");
+     let sidebarBtn = document.querySelector(".bx-menu");
+     console.log(sidebarBtn);
+     sidebarBtn.addEventListener("click", ()=>{
+       sidebar.classList.toggle("close");
+     });
+        
 </script>
 </body>
 </html>
