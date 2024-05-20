@@ -105,8 +105,8 @@ $row = $result->fetch_assoc();
     $mission_result = $mission_sql->get_result();
     $mission_row = $mission_result->fetch_assoc();
     ?>
-    <div id="mission-dashboard">
-        <h2>Mission Dashboard</h2>
+    <div class="mission-dashboard">
+        <h1>Mission Dashboard:</h1>
         <table border="1">
             <tr>
                 <th>Departure City</th>
@@ -137,8 +137,8 @@ $row = $result->fetch_assoc();
             </tr>
         </table>
         <!-- Vehicle Details -->
-        <div id="vehicle-details">
-        <h2>Vehicle Details</h2>
+        <div class="vehicle-details">
+        <h1>Vehicle Details:</h1>
         <table border="1">
             <tr>
                 <th>Vehicle ID</th>
@@ -177,14 +177,14 @@ $row = $result->fetch_assoc();
             }
             ?>
         </table>
-    </div>
+        </div>
         <form action="process_finish.php" method="post">
             <input type="hidden" name="mission_id" value="<?php echo $selected_mission; ?>">
-            <input type="submit" name="finish_mission" value="Finish Mission">
+            <input type="submit" class="finish-button" name="finish-button" value="Finish Mission">
         </form>
         <div id="frais-imprevus">
             <form action="process_incidentals.php" method="post">
-                <legend><strong>Incidentals:</strong></legend>
+                <h1>Incidentals:</h1>
                 <input type="text" name="incidentals" placeholder="Enter incidentals..." required><br>
                 <input type="number" name="amount" placeholder="Enter amount..." required><br>
                 <input type="submit" name="submit" value="Send">&nbsp;
