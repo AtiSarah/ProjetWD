@@ -114,8 +114,13 @@ $row = $result->fetch_assoc();
 <?php
     if (isset($_SESSION['mission_added']) && $_SESSION['mission_added'] === true) {
     // Sélectionnez toutes les données des véhicules depuis la base de données
-    $sql = "SELECT id_vehicle, immatriculation, type, license_type, brand, state FROM vehicle";
-    $result = $link->query($sql);
+    $sql = "SELECT v.id_vehicle, v.immatriculation, v.type, v.license_type, v.brand, v.state 
+    FROM vehicle v
+    LEFT JOIN mission m ON v.id_vehicle = m.id_vehicle AND m.finish = 0
+    WHERE m.id_vehicle IS NULL";
+    $result = $link->query($sql); 
+
+
 
     // Vérifiez s'il y a des données disponibles
     if ($result->num_rows > 0) {
@@ -166,10 +171,3 @@ $row = $result->fetch_assoc();
 </div>
 </body>
  </section>
- 
-
- 
-
-  
-
-    
