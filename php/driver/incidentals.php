@@ -137,7 +137,7 @@ $row = $result->fetch_assoc();
             </tr>
         </table>
         <!-- Vehicle Details -->
-        <div class="vehicle-details">
+        <div class="vehicle-details"><br>
         <h1>Vehicle Details:</h1>
         <table border="1">
             <tr>
@@ -179,8 +179,8 @@ $row = $result->fetch_assoc();
         </table>
         </div>
         <form action="process_finish.php" method="post">
-            <input type="hidden" name="mission_id" value="<?php echo $selected_mission; ?>">
-            <input type="submit" class="finish-button" name="finish-button" value="Finish Mission">
+            <input type="hidden" name="mission_id" value="<?php echo $selected_mission; ?>"><br>
+            <input type="submit" class="finish-button" name="finish-button" value="Finish Mission"><br><br>
         </form>
         <div id="frais-imprevus">
             <form action="process_incidentals.php" method="post">
