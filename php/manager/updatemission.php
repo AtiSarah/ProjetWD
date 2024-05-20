@@ -104,9 +104,9 @@ $row = $result->fetch_assoc();
         $departure_timestamp = strtotime($departure_date);
         $arrival_timestamp = strtotime($arrival_date);
 
-        if ($departure_timestamp <= $current_date) {
+        if ($departure_timestamp < $current_date) {
           echo "Invalid departure date. Departure date must be in the future.";
-        } elseif ($arrival_timestamp <= $departure_timestamp) {
+        } elseif ($arrival_timestamp < $departure_timestamp) {
           echo "Invalid arrival date. Arrival date must be after the departure date.";
         } else {
           $updateSql = $link->prepare("UPDATE mission SET departure_city=?, arrival_city=?, departure_date=?, arrival_date=?, cost=?, type=?, finish=? WHERE id_mission=?");
