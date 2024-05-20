@@ -28,7 +28,7 @@ $row = $result->fetch_assoc();
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-  <div class="sidebar close">
+<div class="sidebar close">
     <div class="logo-details">
     <i class="#"></i>
       <span class="logo_name">VROOMCAR</span>
@@ -41,19 +41,6 @@ $row = $result->fetch_assoc();
         </a>
         <ul class="sub-menu blank">
           <li><a class="link_name" href="driver.php">Dashboard</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="mission.php">
-            <i class='bx bx-collection' ></i>
-            <span class="link_name">Mission</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a href="mission.php">View Mission</a></li><!-- MISSION-->
-          <li><a href="incidentals.php">Add Incidentals</a></li><!-- ADD INCIDENTALS-->
         </ul>
       </li>
       <li>

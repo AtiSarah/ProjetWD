@@ -59,19 +59,6 @@ $mission_result = $mission_sql->get_result();
         </ul>
       </li>
       <li>
-        <div class="iocn-link">
-          <a href="mission.php">
-            <i class='bx bx-collection' ></i>
-            <span class="link_name">Mission</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a href="mission.php">View Mission</a></li><!-- MISSION-->
-          <li><a href="incidentals.php">Add Incidentals</a></li><!-- ADD INCIDENTALS-->
-        </ul>
-      </li>
-      <li>
       <a href="account.php"><!-- ACCOUNT-->
             <i class="fa-solid fa-user"></i>
           <span class="link_name">Account</span>
