@@ -27,6 +27,17 @@ if (isset($_POST['finish-button']) && isset($_POST['mission_id'])) {
     $update_sql->execute();
 }
 
+// Handle incidentals form submission
+if (isset($_POST['submit']) && isset($_POST['incidentals']) && isset($_POST['amount'])) {
+    $incidentals_type = $_POST['incidentals'];
+    $amount = $_POST['amount'];
+    $id_mission = $selected_mission;
+
+    $insert_sql = $link->prepare("INSERT INTO incidental (id_mission, type, montant) VALUES (?, ?, ?)");
+    $insert_sql->bind_param("isd", $id_mission, $incidentals_type, $amount);
+    $insert_sql->execute();
+}
+
 // Get user information
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
@@ -193,7 +204,7 @@ $row = $result->fetch_assoc();
             <input type="submit" class="finish-button" name="finish-button" value="Finish Mission"><br><br>
         </form>
         <div id="frais-imprevus">
-            <form action="process_incidentals.php" method="post">
+            <form action="incidentals.php" method="post">
                 <h1>Incidentals:</h1>
                 <input type="text" name="incidentals" placeholder="Enter incidentals..." required><br>
                 <input type="number" name="amount" placeholder="Enter amount..." required><br>
