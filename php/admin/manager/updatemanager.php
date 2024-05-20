@@ -166,7 +166,7 @@ if ($result && $result->num_rows > 0) {
                     <input type='text' name='lastname' value='" . $row['lastname'] . "'>
                     <input type='date' name='datenaiss' value='" . $row['datenaiss'] . "'>
                     <input type='text' name='phone' value='" . $row['phone'] . "'>
-                    <button type='submit' name='update' onclick='confirmUpdate(" . $row['id_manager'] . ")' class='update-button'>Update</button>
+                    <button type='submit' name='update' class='update-button'>Update</button>
                 </form>
             </td>";
         echo "</tr>";
@@ -185,30 +185,14 @@ mysqli_close($link);
     <input type="hidden" id="confirmAction" name="confirmAction">
 </form>
 
-<script>
-    function confirmUpdate(id_manager) {
-        if (confirm("Are you sure you want to update this manager?")) {
-            document.getElementById("id_manager").value = id_manager;
-            document.getElementById("confirmAction").value = "update";
-            document.getElementById("confirmForm").submit();
-        }
-    }
-</script>
+
 
 <form id="confirmForm" method="post" action="">
     <input type="hidden" id="id_driver" name="id_driver">
     <input type="hidden" id="confirmAction" name="confirmAction">
 </form>
 
-<script>
-    function confirmUpdate(id_driver) {
-        if (confirm("Are you sure you want to update this driver?")) {
-            document.getElementById("id_driver").value = id_driver;
-            document.getElementById("confirmAction").value = "update";
-            document.getElementById("confirmForm").submit();
-        }
-    }
-</script>
+
 </div>
 </section>
 
