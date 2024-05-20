@@ -1,10 +1,23 @@
 <?php
 session_start();
-include("../dbp.php"); 
+include("../dbp.php");
+
+// Check if the user is logged in
 if (!isset($_SESSION['profile1'])) {
     header("Location: ../error.php");
     exit();
-  }
+}
+
+// Check if a mission ID is received via POST
+if (isset($_POST['selected_mission'])) {
+    $selected_mission = $_POST['selected_mission'];
+    $_SESSION['selected_mission'] = $selected_mission;
+} else {
+    header("Location: driver.php");
+    exit();
+}
+
+// Get user information
 $id = $_SESSION['user_id'];
 $sql = $link->prepare("SELECT * FROM driver WHERE id = ?");
 $sql->bind_param("i", $id);
@@ -17,7 +30,7 @@ $row = $result->fetch_assoc();
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
+    <title>Incidentals</title>
     <link rel="stylesheet" href="incidentals.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -84,18 +97,104 @@ $row = $result->fetch_assoc();
         <i class='bx bx-menu' ></i>
         <span class="text"></span>
     </div>
-    <!-- Frais-imprevus-->
-    <div id="frais-imprevus">
-        <form action="process_incidentals.php" method="post">
-            <legend><strong>Incidentals:</strong></legend>
-            <input type="text" name="incidentals" placeholder="Enter incidentals..." required><br>
-            <input type="number" name="amount" placeholder="Enter amount..." required><br>
-            <input type="submit" name="submit" value="Send">&nbsp;
-            <input type="reset" value="Cancel">
-        </form>
-    </div>
-</section>
+    <!-- Mission Dashboard -->
+    <?php
+    $mission_sql = $link->prepare("SELECT * FROM mission WHERE id_mission = ?");
+    $mission_sql->bind_param("i", $selected_mission);
+    $mission_sql->execute();
+    $mission_result = $mission_sql->get_result();
+    $mission_row = $mission_result->fetch_assoc();
+    ?>
+    <div id="mission-dashboard">
+        <h2>Mission Dashboard</h2>
+        <table border="1">
+            <tr>
+                <th>Departure City</th>
+                <th>Arrival City</th>
+                <th>Departure Date</th>
+                <th>Arrival Date</th>
+                <th>Cost</th>
+                <th>Type</th>
+                <th>Vehicle</th>
+                <th>Finish</th>
+            </tr>
+            <tr>
+                <td><?php echo $mission_row['departure_city']; ?></td>
+                <td><?php echo $mission_row['arrival_city']; ?></td>
+                <td><?php echo $mission_row['departure_date']; ?></td>
+                <td><?php echo $mission_row['arrival_date']; ?></td>
+                <td><?php echo $mission_row['cost']; ?></td>
+                <td><?php echo $mission_row['type']; ?></td>
+                <td><?php
+                    $vehicle_sql = $link->prepare("SELECT * FROM vehicle WHERE id_vehicle = ?");
+                    $vehicle_sql->bind_param("i", $mission_row['id_vehicle']);
+                    $vehicle_sql->execute();
+                    $vehicle_result = $vehicle_sql->get_result();
+                    $vehicle_row = $vehicle_result->fetch_assoc();
+                    echo ($vehicle_result->num_rows > 0) ? $vehicle_row['immatriculation'] : 'N/A';
+                    ?></td>
+                <td><?php echo $mission_row['finish']; ?></td>
+            </tr>
+        </table>
+        <!-- Vehicle Details -->
+        <div id="vehicle-details">
+        <h2>Vehicle Details</h2>
+        <table border="1">
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Immatriculation</th>
+                <th>Type</th>
+                <th>License Type</th>
+                <th>Brand</th>
+                <th>State</th>
+            </tr>
+            <?php
+            $vehicle_id = $mission_row['id_vehicle'];
+            $vehicle_details_sql = $link->prepare("SELECT * FROM vehicle WHERE id_vehicle = ?");
+            $vehicle_details_sql->bind_param("i", $vehicle_id);
+            $vehicle_details_sql->execute();
+            $vehicle_details_result = $vehicle_details_sql->get_result();
 
+            if ($vehicle_details_result->num_rows > 0) {
+                while ($vehicle_details_row = $vehicle_details_result->fetch_assoc()) {
+                    ?>
+                    <tr>
+                        <td><?php echo $vehicle_details_row['id_vehicle']; ?></td>
+                        <td><?php echo $vehicle_details_row['immatriculation']; ?></td>
+                        <td><?php echo $vehicle_details_row['type']; ?></td>
+                        <td><?php echo $vehicle_details_row['license_type']; ?></td>
+                        <td><?php echo $vehicle_details_row['brand']; ?></td>
+                        <td><?php echo $vehicle_details_row['state']; ?></td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                ?>
+                <tr>
+                    <td colspan="6">No vehicle details found</td>
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+    </div>
+        <form action="process_finish.php" method="post">
+            <input type="hidden" name="mission_id" value="<?php echo $selected_mission; ?>">
+            <input type="submit" name="finish_mission" value="Finish Mission">
+        </form>
+        <div id="frais-imprevus">
+            <form action="process_incidentals.php" method="post">
+                <legend><strong>Incidentals:</strong></legend>
+                <input type="text" name="incidentals" placeholder="Enter incidentals..." required><br>
+                <input type="number" name="amount" placeholder="Enter amount..." required><br>
+                <input type="submit" name="submit" value="Send">&nbsp;
+                <input type="reset" value="Cancel">
+            </form>
+        </div>
+    </div>
+    
+        
+</section>
 <script>
     let arrow = document.querySelectorAll(".arrow");
     for (var i = 0; i < arrow.length; i++) {
