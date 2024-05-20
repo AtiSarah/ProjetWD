@@ -101,7 +101,7 @@
 <!--UPDATE MANAGER-->
  <div class="update-manager">
  <?php
-session_start();
+session_start(); 
 include("../dbp.php"); 
 if ( !isset($_SESSION['admin']) ) {
     header("Location: ../../error.php");
