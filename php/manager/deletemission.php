@@ -110,7 +110,8 @@ $row = $result->fetch_assoc();
             <th>&nbsp;Arrival&nbsp;Date</th>
             <th>Cost</th>
             <th>Type</th>
-            <th>Action</th>
+            <th>Finish</th>
+             <th>Action</th>
             </tr>";
 
             // Output data of each row
@@ -125,10 +126,12 @@ $row = $result->fetch_assoc();
                 echo "<td>" . $row["arrival_date"] . "</td>";
                 echo "<td>" . $row["cost"] . "</td>";
                 echo "<td>" . $row["type"] . "</td>";
-                echo "<td><form method='post' action='deletemission.php'  onsubmit='return confirm(\"Are you sure you want to delete this mission?\")'>
-                        <input type='hidden' name='id' value='" . $row["id_mission"] . "'>
-                        <input type='submit' name='delete'class='delete-mission-btn' value='Delete'>
-                    </form></td>";
+                echo "<td>" . ($row["finish"] == 0 ? 'false' : 'true') . "</td>";
+                echo "<td><form method='post' action='deletemission.php' onsubmit='return confirmDelete(" . $row["finish"] . ")'>
+                <input type='hidden' name='id' value='" . $row["id_mission"] . "'>
+                <input type='submit' name='delete' class='delete-mission-btn' value='Delete'>
+            </form></td>";
+        
                 echo "</tr>";
             }
             // Close the table
@@ -160,6 +163,13 @@ $row = $result->fetch_assoc();
 </div>
   </section>
   <script>
+  function confirmDelete(finish) {
+    if (finish == 0) {
+      return confirm("This mission is still in progress. Are you sure you want to delete it?");
+    }
+    return true;
+  }
+
   let arrow = document.querySelectorAll(".arrow");
   for (var i = 0; i < arrow.length; i++) {
     arrow[i].addEventListener("click", (e)=>{
