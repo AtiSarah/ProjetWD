@@ -114,6 +114,7 @@ $mission_result = $mission_sql->get_result();
                     <th>Cost</th>
                     <th>Type</th>
                     <th>Vehicle</th>
+                    <th>Action</th>
                 </tr>
             </thead>  
             <tbody>
@@ -137,11 +138,16 @@ $mission_result = $mission_sql->get_result();
                         echo htmlspecialchars($vehicle_row['immatriculation']);
                         ?>
                     </td>
+                    <td>
+                        <form action="incidentals.php" method="post">
+                            <input type="hidden" name="selected_mission" value="<?php echo $mission_row['id_mission']; ?>">
+                            <button type="submit" name="start_mission">Start</button>
+                        </form>
+                    </td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
-       <button>Start</button>
     </div>
   </section>
   <script>
