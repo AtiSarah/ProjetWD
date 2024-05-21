@@ -1,8 +1,8 @@
 <?php
 // Database configuration
-$host = "phpmyadmin.alwaysdata.com";
+$host = "localhost";
 $dbuser = "root";
-$dbpass = "Azerty";
+$dbpass = "";
 $dbname = "vroomcar";
 // Create database connection
 $link = mysqli_connect($host, $dbuser, $dbpass, $dbname);
