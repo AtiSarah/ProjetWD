@@ -1,3 +1,56 @@
+<?php
+session_start();
+include "php/dbp.php"; // Inclure le fichier de connexion à la base de données
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email2'];
+    $password = $_POST['password'];
+
+    // Requête SQL pour vérifier l'email et le mot de passe dans la table utilisateur
+    $sql = "SELECT id, email, pass, profile FROM user WHERE email = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows == 1) {
+      $row = $result->fetch_assoc();
+      // Verify the password
+      if (password_verify($password, $row['pass'])) {
+          // Authentication successful, start the session
+          $_SESSION['user_id'] = $row['id'];
+          $email = strtolower($email);
+          
+          // Check if the user is an admin
+          if ($email == "admin@gmail.com") {
+              $_SESSION['admin'] = 1;
+              header("Location: php/admin/admin.php");
+              exit();
+          }
+          
+          // Check user profile and redirect accordingly
+          if ($row['profile'] == 0) {
+              $_SESSION['profile0'] = $row['profile'];
+              // Redirect to manager interface
+              header("Location: php/manager/account.php");
+              exit();
+          } elseif ($row['profile'] == 1) {
+              $_SESSION['profile1'] = $row['profile'];
+              // Redirect to driver interface
+              header("Location: php/driver/driver.php");
+              exit();
+          }
+      } else {
+          // Incorrect password
+          echo "Incorrect password.";
+      }
+  } else {
+      // No user found with this email
+      echo "No user found with this email.";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,7 +97,7 @@
     <!-- about us page-->
     <div class="about" id="section1">
       <div class="about-content">
-        <img src="../html/img/str.png" class="img">
+        <img src="../img/str.png" class="img">
         <h2>ABOUT US</h2>
         <p>Welcome to VroomCar!</p>
         <p>At VroomCar, we aim to simplify vehicle fleet management efficiently and transparently. Our platform is designed for auto dealerships, car rental businesses, and automotive professionals.</p>
@@ -92,7 +145,7 @@
 <div class="login" id="section3">
   
   <h1>LOGIN</h1>
-  <form action="#" method="POST">
+  <form action="#" method="Post">
     <div class="form-group">
       <label for="email2">Email:</label>
       <input type="email" id="email2" name="email2" required placeholder="Enter your email">
