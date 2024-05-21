@@ -14,7 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $datenaiss = $_POST['datenaiss'];
             $phone = $_POST['phone'];
             $license_type = $_POST['license']; 
-
+            $pwd_hash=$_SESSION['pwd'];
+            $email=$_SESSION['email'];
+            $profile=$_SESSION['profile'];
             // Calculate the age based on the date of birth
             $today = new DateTime();
             $birthdate = new DateTime($_POST['datenaiss']);
@@ -22,16 +24,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if the age is 18 or above
             if ($age >= 18) {
-                // Check if user ID is available in session
-                if (isset($_SESSION['user_id'])) {
-                    $user_id = $_SESSION['user_id'];
+                
+                      // Insérer les données de l'utilisateur
+                $sql2 = $link->prepare("INSERT INTO user (email, pass, profile) VALUES (?, ?, ?)");
+                $sql2->bind_param("ssi", $email, $pwd_hash, $profile);
+                $sql2->execute();
 
+                // Obtenir l'ID de l'utilisateur inséré
+                $user_id = $link->insert_id;
+
+    
+
+                
                     // Insert the driver data
                     $sql = $link->prepare("INSERT INTO driver (id, firstname, lastname, datenaiss, phone, license_type) VALUES (?, ?, ?, ?, ?, ?)");
-                    $sql->bind_param("isssss", $user_id, $firstname, $lastname, $datenaiss, $phone, $license_type);
+                    $sql->bind_param("isssis", $user_id, $firstname, $lastname, $datenaiss, $phone, $license_type);
                     $sql->execute();
                     $sql->close();
-
+                    $sql2->close();
                     // Redirect after insertion
                     header("Location: dashdriver.php"); // Adjust the location if needed
                     exit();
@@ -39,12 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Handle error if user ID is not available in session
                     echo "User ID not found. Please insert user data first.";
                 }
-            } else {
-                echo "Driver must be 18 years or older."; 
             }
         } 
     }
-}
+
 ?>
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->

@@ -14,6 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lastname = $_POST['lastname'];
             $datenaiss = $_POST['datenaiss'];
             $phone = $_POST['phone'];
+            $pwd_hash=$_SESSION['pwd'];
+            $email=$_SESSION['email'];
+            $profile=$_SESSION['profile'];
           
 
 
@@ -25,29 +28,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Display a message that the manager must be at least 19 years old
                 echo "This manager must be at least 19 years old.";
             } else {
-                // Check if user ID is available in session
-                if (isset($_SESSION['user_id'])) {
-                    $user_id = $_SESSION['user_id'];
+                
 
+               // Insérer les données de l'utilisateur
+                $sql2 = $link->prepare("INSERT INTO user (email, pass, profile) VALUES (?, ?, ?)");
+                $sql2->bind_param("ssi", $email, $pwd_hash, $profile);
+                $sql2->execute();
+
+                // Obtenir l'ID de l'utilisateur inséré
+                $user_id = $link->insert_id;
+               
                     // Insert the manager data
                     $sql = $link->prepare("INSERT INTO manager (id, firstname, lastname, datenaiss, phone) VALUES (?, ?, ?, ?, ?)");
-                    $sql->bind_param("issss", $user_id, $firstname, $lastname, $datenaiss, $phone);
+                    $sql->bind_param("isssi", $user_id, $firstname, $lastname, $datenaiss, $phone);
                     $sql->execute();
 
                     // Close the statement
+                    $sql2->close();
                     $sql->close();
 
                     // Redirect to appropriate page after insertion
                     header("Location: dashmanager.php"); // Adjust the location if needed
                     exit();
-                } else {
-                    // Handle error if user ID is not available in session
-                    echo "User ID not found. Please insert user data first.";
-                }
+                } 
             }
         } 
     }
-}
+
 ?>
 <!DOCTYPE html>
 <!-- Coding by CodingNepal | www.codingnepalweb.com -->

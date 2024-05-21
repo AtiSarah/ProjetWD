@@ -131,20 +131,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Hasher le mot de passe 
                 $pwd_hash = password_hash($password, PASSWORD_DEFAULT);
 
-                // Insérer les données de l'utilisateur
-                $sql = $link->prepare("INSERT INTO user (email, pass, profile) VALUES (?, ?, ?)");
-                $sql->bind_param("sss", $email, $pwd_hash, $profile);
-                $sql->execute();
-
-                // Obtenir l'ID de l'utilisateur inséré
-                $user_id = $link->insert_id;
-
-                // Stocker l'ID de l'utilisateur en session pour une utilisation future
-                $_SESSION['user_id'] = $user_id;
-
-                // Fermer l'instruction
-                $sql->close();
-
+                $_SESSION['pwd']=$pwd_hash;
+                $_SESSION['email']=$email;
+                $_SESSION['profile']=$profile;
                 // Rediriger en fonction du profil
                 if ($profile == 0) {
                     header("Location: ../manager/manager.php");
